@@ -8,21 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Category {
-  ELECTRONICS
-  FASHION_ACCESSORIES
-  HOME_GARDEN
-  ART_ANTIQUES
-  COLLECTIBLES_MEMORABILIA
-  JEWELRY_WATCHES
-  VEHICLES_AUTO
-  SPORTS_MEMORABILIA
-  TOYS_HOBBIES
-  BOOKS_MEDIA
-  TICKETS_EXPERIENCES
-  INDUSTRIAL_EQUIPMENT
-}
-
 model users {
   id           Int           @id @default(autoincrement())
   username     String        @unique
@@ -77,4 +62,19 @@ model favorites {
   userId Int
   users  users @relation(fields: [userId], references: [id])
   bids   bids  @relation(fields: [bidId], references: [id])
+}
+
+enum Category {
+  ELECTRONICS
+  FASHION_ACCESSORIES
+  HOME_GARDEN
+  ART_ANTIQUES
+  COLLECTIBLES_MEMORABILIA
+  JEWELRY_WATCHES
+  VEHICLES_AUTO
+  SPORTS_MEMORABILIA
+  TOYS_HOBBIES
+  BOOKS_MEDIA
+  TICKETS_EXPERIENCES
+  INDUSTRIAL_EQUIPMENT
 }

@@ -23,7 +23,8 @@ model users {
 model bids {
   id           Int           @id @default(autoincrement())
   bidItem      String
-  highestBid   Int
+  startingBid  Int
+  highestBid   Int?
   category     Category
   posted       DateTime      @default(now())
   userId       Int

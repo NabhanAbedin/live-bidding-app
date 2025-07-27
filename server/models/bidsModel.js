@@ -34,7 +34,7 @@ const postBidModel = async (userId,bidItem,startingBid,category,duration) => {
         data: {
             userId: userId,
             bidItem: bidItem,
-            highestBid: startingBid,
+            startingBid: startingBid,
             category: category,
             bid_duration: duration
         },

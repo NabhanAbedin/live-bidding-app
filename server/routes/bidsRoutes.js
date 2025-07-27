@@ -12,10 +12,11 @@ router
     .route('/:bidId')
     .get(ctrl.getBidById)
     .delete(authMiddleware,ctrl.deleteBid)
-//     .update()
+    .patch(authMiddleware,ctrl.updateBid)
 
 // router
 //     .route('/auctions/:bidId')
 //     .update()
+//might get rid of this since socket can talk with prisma directly to update highest bid
 
 module.exports = router;

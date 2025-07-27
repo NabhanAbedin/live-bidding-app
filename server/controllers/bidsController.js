@@ -1,6 +1,6 @@
 const {asyncErrorHandler} = require('../middleware/errorMiddleware');
 const AppError = require('../utils/AppError');
-const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidModel} = require('../models/bidsModel');
+const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidModel, updateBidModel} = require('../models/bidsModel');
 
 const getBids = asyncErrorHandler(async(req,res) => {
     if (req.query) {
@@ -42,6 +42,24 @@ const deleteBid = asyncErrorHandler(async(req,res,next)=> {
     }
 
     return res.status(200).json({message: 'deleted bid'});
+})
+
+const updateBid = asyncErrorHandler(async(req,res,next) => {
+    const userId = req.userId;
+    const bidId = req.params.bidId;
+    const updatedData = req.body;
+    console.log(updatedData);
+
+    const allowedChange = ['bidItem','highestBid', 'category', 'bid_duration', 'title', 'description'];
+
+    const updatedBid = await updateBidModel(Number(bidId), Number(userId), updatedData);
+
+    if (!updatedBid) {
+        return next(new AppError('could not update bid', 500))
+    }
+    
+    return res.status(201).json(updatedBid);
+
 
 
 })
@@ -51,5 +69,6 @@ module.exports = {
     getBids,
     getBidById,
     postBid,
-    deleteBid
+    deleteBid,
+    updateBid
 }

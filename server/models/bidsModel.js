@@ -60,10 +60,24 @@ const deleteBidModel = async (bidId, userId) => {
     return true;
 }
 
+const updateBidModel = async (bidId,userId, updatedData) => {
+    const row = await prisma.bids.update({
+        where: {
+            id: bidId,
+            userId: userId
+        },
+        data: updatedData
+
+    })
+
+    return row;
+}
+
 module.exports = {
     getAllBidsModel,
     searchBidsModel,
     getBidByIdModel,
     postBidModel,
-    deleteBidModel
+    deleteBidModel,
+    updateBidModel
 }

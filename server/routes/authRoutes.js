@@ -4,7 +4,7 @@ const ctrl = require('../controllers/authController');
 
  router
     .route('/login')
-   .post(ctrl.login)
+    .post(ctrl.login)
 
 router
     .route('/register')

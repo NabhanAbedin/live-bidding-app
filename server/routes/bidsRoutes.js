@@ -1,19 +1,21 @@
 const express = require('express');
-const router = express.router({mergeParams: true});
-
+const router = express.Router({mergeParams: true});
+const ctrl = require('../controllers/bidsController');
+const authMiddleware = require('../middleware/authMiddleware');
 
 router
     .route('/')
-    .get()
-    .post()
-    .delete()
+    .get(ctrl.getBids)
+    .post(authMiddleware,ctrl.postBid)
     
 router
     .route('/:bidId')
-    .get()
+    .get(ctrl.getBidById)
+    .delete(authMiddleware,ctrl.deleteBid)
+//     .update()
 
-router
-    .route('/auction/:bidId')
-    .update()
+// router
+//     .route('/auctions/:bidId')
+//     .update()
 
 module.exports = router;

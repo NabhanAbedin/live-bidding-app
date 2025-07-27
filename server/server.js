@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const AppError = require('./utils/AppError');
 const { globalErrorHandler } = require('./middleware/errorMiddleware');
 const authRoutes = require('./routes/authRoutes');
+const bidRoutes = require('./routes/bidsRoutes');
 
 app.use(cookieParser());
 app.use(cors({
@@ -17,7 +18,9 @@ app.use(express.json());
 
 app.use(globalErrorHandler);
 
-app.use('/auth', authRoutes)
+app.use('/auth', authRoutes);
+
+app.use('/bids', bidRoutes);
 
 app.all('/*splat', (req,res,next) => {
 

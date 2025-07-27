@@ -1,0 +1,69 @@
+const prisma = require('../db');
+
+const getAllBidsModel = async () => {
+    const rows = await prisma.bids.findMany()
+
+    return rows;
+}
+
+const searchBidsModel = async(query) => {
+    const rows = await prisma.bids.findMany({
+        where: {
+            bidItem: {
+                contains: query,
+                mode: 'insensitive'
+            }
+        }
+    })
+
+    return rows;
+}
+
+const getBidByIdModel = async (bidId) => {
+    const row = await prisma.bids.findFirst({
+        where: {
+            id: bidId
+        }
+    })
+
+    return row;
+}
+
+const postBidModel = async (userId,bidItem,startingBid,category,duration) => {
+    const bidId = await prisma.bids.create({
+        data: {
+            userId: userId,
+            bidItem: bidItem,
+            highestBid: startingBid,
+            category: category,
+            bid_duration: duration
+        },
+        select: {
+            id: true
+        }
+    })
+
+    return bidId;
+}
+
+const deleteBidModel = async (bidId, userId) => {
+    const result = await prisma.bids.deleteMany({
+        where: {
+            id: bidId,
+            userId: userId
+        }
+    })
+
+    if (result.count === 0) {
+        return false;
+    }
+    return true;
+}
+
+module.exports = {
+    getAllBidsModel,
+    searchBidsModel,
+    getBidByIdModel,
+    postBidModel,
+    deleteBidModel
+}

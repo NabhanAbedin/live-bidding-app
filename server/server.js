@@ -4,7 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const AppError = require('./utils/AppError');
-const globalErrorhandler = require('./middleware/errorMiddleware');
+const { globalErrorHandler } = require('./middleware/errorMiddleware');
+const authRoutes = require('./routes/authRoutes');
 
 app.use(cookieParser());
 app.use(cors({
@@ -12,16 +13,17 @@ app.use(cors({
     credentials: true
 }))
 
+app.use(express.json());
+
+app.use(globalErrorHandler);
+
+app.use('/auth', authRoutes)
+
 app.all('/*splat', (req,res,next) => {
 
     const err = new AppError(`Can't find ${req.originalUrl} on server`, 404);
     next(err);
 })
-
-app.use(globalErrorhandler);
-app.use(express.json());
-
-
 
 app.listen(5002, () => {
     console.log('server started');

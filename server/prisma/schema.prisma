@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  ELECTRONICS
+  FASHION_ACCESSORIES
+  HOME_GARDEN
+  ART_ANTIQUES
+  COLLECTIBLES_MEMORABILIA
+  JEWELRY_WATCHES
+  VEHICLES_AUTO
+  SPORTS_MEMORABILIA
+  TOYS_HOBBIES
+  BOOKS_MEDIA
+  TICKETS_EXPERIENCES
+  INDUSTRIAL_EQUIPMENT
+}
+
+model users {
+  id           Int           @id @default(autoincrement())
+  username     String        @unique
+  passwordHash String
+  createdAt    DateTime      @default(now())
+  currency     Int           @default(0)
+  bidCreator   bids[]        @relation("bid_creator")
+  bidWinner    bids[]        @relation("bid_winner")
+  collections  collections[]
+  chats        chats[]
+  favorites    favorites[]
+}
+
+model bids {
+  id           Int           @id @default(autoincrement())
+  bidItem      String
+  highestBid   Int
+  category     Category
+  posted       DateTime      @default(now())
+  userId       Int
+  bidSold      Int?
+  winnerId     Int?
+  bid_duration Int           @default(5)
+  bid_host     users         @relation("bid_creator", fields: [userId], references: [id])
+  bid_winner   users?        @relation("bid_winner", fields: [winnerId], references: [id])
+  collections  collections[]
+  chats        chats[]
+  favorites    favorites[]
+}
+
+model collections {
+  id     Int   @id @default(autoincrement())
+  bidId  Int
+  userId Int
+  bids   bids  @relation(fields: [bidId], references: [id])
+  users  users @relation(fields: [userId], references: [id])
+}
+
+model chats {
+  id        Int      @id @default(autoincrement())
+  bidId     Int
+  userId    Int
+  chatText  String
+  timestamp DateTime @default(now())
+  users     users    @relation(fields: [userId], references: [id])
+  bids      bids     @relation(fields: [bidId], references: [id])
+}
+
+model favorites {
+  id     Int   @id @default(autoincrement())
+  bidId  Int
+  userId Int
+  users  users @relation(fields: [userId], references: [id])
+  bids   bids  @relation(fields: [bidId], references: [id])
+}

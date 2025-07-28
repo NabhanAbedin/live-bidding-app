@@ -23,11 +23,11 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
-app.use('/bids', bidRoutes);
+app.use('/api/bids', bidRoutes);
 
-app.use('/users', usersRoutes);
+app.use('/api/users', usersRoutes);
 
 app.all('/*splat', (req,res,next) => {
 

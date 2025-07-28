@@ -2,7 +2,11 @@ const prisma = require('../db');
 
 const getFavoritesModel = async (userId) => {
     const rows = await prisma.favorites.findMany({
+        where: {
+            userId: userId
+        },
         select: {
+            id: true,
             bidId: true,
             bids: {
                 select: {
@@ -16,7 +20,8 @@ const getFavoritesModel = async (userId) => {
         }
     })
 
-    return rows.map(({ bidId, bids }) => ({
+    return rows.map(({id, bidId, bids }) => ({
+        id,
         bidId,
         ...bids
       }));

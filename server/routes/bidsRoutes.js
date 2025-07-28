@@ -3,6 +3,7 @@ const router = express.Router({mergeParams: true});
 const ctrl = require('../controllers/bidsController');
 const authMiddleware = require('../middleware/authMiddleware');
 
+//all these api routes are for altering/creating bids and NOT during when the live bidding is happening and on completion
 router
     .route('/')
     .get(ctrl.getBids)
@@ -14,9 +15,5 @@ router
     .delete(authMiddleware,ctrl.deleteBid)
     .patch(authMiddleware,ctrl.updateBid)
 
-// router
-//     .route('/auctions/:bidId')
-//     .update()
-//might get rid of this since socket can talk with prisma directly to update highest bid
 
 module.exports = router;

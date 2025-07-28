@@ -1,9 +1,14 @@
 const express = require('express');
-const router = express.router({mergeParams: true});
+const router = express.Router({mergeParams: true});
+const authMiddleware = require('../middleware/authMiddleware');
 
 router
     .route('/')
-    .post()
     .get()
+
+router
+    .route('/:bidId')
+    .post()
+    .delete()
 
 module.exports = router;

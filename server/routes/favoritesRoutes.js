@@ -1,13 +1,14 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
+const ctrl = require('../controllers/favoritesController');
 
 router
     .route('/:bidId')
-    .post()
-    .delete()
+    .post(ctrl.addToFavorites)
+    .delete(ctrl.deleteFavorites)
 
 router
     .route('/')
-    .get()
+    .get(ctrl.getFavorites)
 
 module.exports = router;

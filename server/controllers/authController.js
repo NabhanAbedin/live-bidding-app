@@ -24,7 +24,7 @@ const register = asyncErrorHandler(async(req,res,next) => {
         sameSite: 'lax',
         maxAge: 1000 * 60 * 60
     })
-    return res.status(201).json({id: user.id, username: user.username});
+    return res.status(201).json({id: user.id, username: user.username, currency: user.currency});
 })
 
 const login = asyncErrorHandler(async(req,res,next)=> {
@@ -47,7 +47,7 @@ const login = asyncErrorHandler(async(req,res,next)=> {
         sameSite: 'lax',
         maxAge: 1000 * 60 * 60
     })
-    return res.status(201).json({id: user.id, username: user.username});
+    return res.status(201).json({id: user.id, username: user.username, currency: user.currency});
 
 })
 

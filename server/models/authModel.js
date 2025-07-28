@@ -9,7 +9,8 @@ const createUser = async (username, passwordHash) => {
         },
         select: {
             id: true,
-            username: true
+            username: true,
+            currency: true
         }
     })
 
@@ -22,6 +23,7 @@ const finduserByName = async (username) => {
             id: true,
             username: true,
             passwordHash: true,
+            currency: true
         },
         where: {
             username: username

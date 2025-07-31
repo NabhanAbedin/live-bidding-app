@@ -3,7 +3,6 @@ const AppError = require('../utils/AppError');
 const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidModel, updateBidModel} = require('../models/bidsModel');
 
 const getBids = asyncErrorHandler(async(req,res) => {
-    console.log(req.query.search);
     if (req.query.search) {
         query = req.query.search;
         const searchBids = await searchBidsModel(query);
@@ -49,9 +48,6 @@ const updateBid = asyncErrorHandler(async(req,res,next) => {
     const userId = req.userId;
     const bidId = req.params.bidId;
     const updatedData = req.body;
-    console.log(updatedData);
-
-    const allowedChange = ['bidItem','highestBid', 'category', 'bid_duration', 'title', 'description'];
 
     const updatedBid = await updateBidModel(Number(bidId), Number(userId), updatedData);
 

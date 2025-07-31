@@ -3,13 +3,15 @@ const AppError = require('../utils/AppError');
 const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidModel, updateBidModel} = require('../models/bidsModel');
 
 const getBids = asyncErrorHandler(async(req,res) => {
-    if (req.query) {
+    if (req.query.search) {
         query = req.query.search;
+        console.log(query);
         const searchBids = await searchBidsModel(query);
         return res.status(200).json(searchBids);
     }
-
-    const bids = await getAllBidsModel();
+    const limit = req.query.limit ? Number(req.query.limit) : undefined;
+    console.log(limit);
+    const bids = await getAllBidsModel(limit);
 
     return res.status(200).json(bids);
 

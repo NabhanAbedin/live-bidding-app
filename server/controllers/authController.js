@@ -60,8 +60,16 @@ const logOut = asyncErrorHandler(async(req,res) => {
     return res.status(200).json({message: 'logged out successfully'})
 })
 
+const checkLogin = asyncErrorHandler(async(req,res,next)=> {
+    const userId = req.userId;
+    const user = findUserById(Number(userId));
+
+    return res.status(200).json(user);
+})
+
 module.exports = {
     register,
     login,
-    logOut
+    logOut,
+    checkLogin
 }

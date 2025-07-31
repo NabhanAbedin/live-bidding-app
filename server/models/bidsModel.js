@@ -1,10 +1,14 @@
 const prisma = require('../db');
 
-const getAllBidsModel = async () => {
+const getAllBidsModel = async (limit) => {
     const rows = await prisma.bids.findMany({
         where: {
             bidSold: null
-        }
+        },
+        orderBy: {
+            posted: 'desc'
+        },
+        take: limit
     });
 
     return rows;
@@ -18,6 +22,9 @@ const searchBidsModel = async(query) => {
                 contains: query,
                 mode: 'insensitive'
             }
+        },
+        orderBy: {
+            posted: 'desc'
         }
     })
 

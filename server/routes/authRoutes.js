@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers/authController');
+const authMiddleware = require('../middleware/authMiddleware');
 
 router
     .route('/')
-    .get(ctrl.checkLogin);
+    .get(authMiddleware,ctrl.checkLogin);
 
  router
     .route('/login')

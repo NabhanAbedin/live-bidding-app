@@ -21,7 +21,7 @@ export const AuthProvider =({children}) => {
                 username: userData.username
             })
         }
-    },[]);
+    },[userData]);
 
     const clientLogIn = (userData) => {
         setUser(userData);

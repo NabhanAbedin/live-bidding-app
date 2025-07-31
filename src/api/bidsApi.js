@@ -14,8 +14,8 @@ export const getBidsForHomePage = async () => {
     const res = await fetch(`${API_BASE}/api/bids?limit=5`);
     const json = await res.json();
 
-    if (json.error) {
-        throw new Error(json.error);
+    if (!res.ok) {
+        throw new Error(json.message);
     }
 
     return json;

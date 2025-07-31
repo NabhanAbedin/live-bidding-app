@@ -11,12 +11,13 @@ const JWT_EXPIRY = '1h';
 const register = asyncErrorHandler(async(req,res,next) => {
     const {username, password} = req.body;
     const hash = await bcrypt.hash(password,SALT_ROUNDS);
-    const user = await createUser(username,hash);
+    const exists = await finduserByName(username); 
 
-    if (!user) {
+    if (exists) {
         return next(new AppError('username exists', 409));
     }
 
+    const user = await createUser(username,hash);
     const token = await jwt.sign({userId: user.id}, JWT_SECRET, {expiresIn: JWT_EXPIRY});
     
     res.cookie('token', token, {

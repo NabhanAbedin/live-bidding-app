@@ -45,7 +45,7 @@ const Register = () => {
             </div>
            <FormInput name={'username'} valueType={formData.username} handleChange={handleChange} />
            <FormInput name={'password'} valueType={formData.password} handleChange={handleChange} />
-          <button type="submit">Log in</button>
+          <button type="submit">Create account</button>
           <div className="create-container">
             <p>Have an account? log in <Link to='/login'>
             here

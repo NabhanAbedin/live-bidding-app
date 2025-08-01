@@ -4,6 +4,8 @@ import { useAuth } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
 import { userLogin } from "../../api/authApi";
 import FormInput from "./FormInput";
+import '../../styles/authenticationPages.css';
+import InvalidCredentials from "./InvalidCredentials";
 
 
 const Login = () => {
@@ -37,7 +39,7 @@ const Login = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="authentication-form">
             <div className="form-header">
                 <h1>Log in</h1>
             </div>
@@ -48,6 +50,9 @@ const Login = () => {
             <p>Dont Have an account with us? create one <Link to='/register'>
             here
             </Link></p>
+            {error && (
+                <InvalidCredentials />
+            )}
             </div>
         </form>
     )

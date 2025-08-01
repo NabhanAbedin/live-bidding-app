@@ -3,7 +3,7 @@ const FormInput = ({name, valueType, handleChange}) => {
         <div>
         <label htmlFor={name}>{name}:</label>
         <input 
-        type="text"
+        type={name === 'password' ? 'password' : 'text'}
         id={name}
         name={name}
         value={valueType}

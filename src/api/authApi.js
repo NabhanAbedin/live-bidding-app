@@ -18,7 +18,6 @@ export const logOut = async () => {
 }
 
 export const userLogin = async ({username, password}) => {
-    console.log('called to log in', username, password);
     const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
@@ -34,4 +33,21 @@ export const userLogin = async ({username, password}) => {
     
     return res;
 
+}
+
+export const userRegister = async ({username, password}) => {
+    const res = await fetch(`${API_BASE}/api/auth/register`, {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+         username: username,
+         password: password
+        })
+    })
+    if (!res.ok) {
+        throw new Error(json.message);
+    }
+    
+    return res;
 }

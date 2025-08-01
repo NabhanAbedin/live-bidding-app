@@ -1,7 +1,9 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export const getUser = async () => {
-    const res = await fetch(`${API_BASE}/api/auth`);
+    const res = await fetch(`${API_BASE}/api/auth`, {
+        credentials: 'include'
+    });
     const json = await res.json();
 
     if (!res.ok) {

@@ -8,7 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider =({children}) => {
     const [user, setUser] = useState(null);
 
-    const {data: userData, isLoading, isError, error} = useQuery({
+    const {data: userData, isLoading: authLoading, isError, error} = useQuery({
         queryKey: ['user'],
         queryFn: getUser,
         retry: 0
@@ -32,7 +32,7 @@ export const AuthProvider =({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{user,clientLogIn, clientLogOut}}>
+        <AuthContext.Provider value={{user,clientLogIn, clientLogOut, authLoading}}>
             {children}
         </AuthContext.Provider>
     )

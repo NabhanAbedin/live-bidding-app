@@ -6,7 +6,7 @@ import { logOut } from "../../api/authApi";
 
 const Nav = () => {
     const navigate = useNavigate();
-    const {user, clientLogOut} = useAuth();
+    const {user, clientLogOut, authLoading} = useAuth();
 
     const {mutate, isLoading, isError, error} =useMutation({
         mutationFn: logOut,
@@ -22,6 +22,8 @@ const Nav = () => {
     const handleLogOut = async () => {
         mutate();
     }
+
+    if (authLoading) return;
     
     return (
         <div className="nav-container">

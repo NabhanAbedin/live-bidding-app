@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
 .image-container {
     flex: 5;
     display: flex;

@@ -17,16 +17,12 @@ const SlidePanelSection = () => {
     
 
     return (
-        <div className="grid-container">
-        <div className="box box1">
-            <h2>Post</h2>
-             <h2>Bid</h2>
-             <h2>Earn.</h2>
-        </div>
-        <div className="box box2"></div>
-        <div className="box box3"></div>
-        <div className="box box4">{<SlidePanel data={bids}/>}</div>
-    </div>
+       <>
+       <SlidePanel data={bids} />
+       <div className="panel-caption">
+        <h3>Latest bids, join and compete!</h3>
+       </div>
+       </>
     )
 }
 

@@ -4,6 +4,7 @@ import PostedBids from "./components/postedBids/PostedBids";
 import Header from "./components/navigation/Header";
 import Login from "./components/authenticationPages/Login";
 import Register from "./components/authenticationPages/CreateAccount";
+import BidPage from "./components/bidPage/BidPage";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <Route path={'bids'} element={<PostedBids/>} />
             <Route path={'/login'} element={<Login />} />
             <Route path={'/register'} element={<Register />} />
+            <Route path={'bids/:bidId'} element={<BidPage />} />
         </Routes>
         </>
     )

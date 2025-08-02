@@ -24,6 +24,8 @@
 .slideshow-container {
     flex: 5;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
     padding-top: 50px;
 }

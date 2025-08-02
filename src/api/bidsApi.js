@@ -20,3 +20,14 @@ export const getBidsForHomePage = async () => {
 
     return json;
 }
+
+export const fetchBidById = async (bidId) => {
+    const res = await fetch(`${API_BASE}/api/bids/${bidId}`);
+    const json = await res.json();
+
+    if (!res.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}

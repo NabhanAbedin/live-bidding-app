@@ -49,11 +49,6 @@ const Nav = () => {
              </div>
             </>
             )}
-            <Link to={'/bids'}  className="nav-link">
-            <button className="nav-button">
-                Bids
-           </button>
-            </Link>
             <Link to={'/'}  className="nav-link">
             <button className="nav-button">
                 Home

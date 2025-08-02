@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import placeholder from '../../assets/placeholder.png';
 import '../../styles/bidcard.css';
 import formatDate from '../../utils/formatDate.js';
@@ -7,12 +7,12 @@ import formatDuration from "../../utils/formatDuration.js";
 const BidCard = ({id, bidItem, startingBid, category, posted, bid_duration}) => {
     const navigate = useNavigate();
 
-    const handleBidClick = (id) => {
+    const handleBidClick = () => {
         navigate(`/bids/${id}`);
     }
 
     return (
-        <div className="bidcard-container" key={id}>
+            <div className="bidcard-container" onClick={handleBidClick}>
             <div className="image-container">
                 <img src={placeholder} alt="" />
             </div>
@@ -24,6 +24,7 @@ const BidCard = ({id, bidItem, startingBid, category, posted, bid_duration}) => 
                 <p className="category">{category}</p>
             </div>  
         </div>
+        
     )
 }
 

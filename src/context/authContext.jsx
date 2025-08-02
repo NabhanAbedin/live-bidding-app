@@ -2,7 +2,6 @@ import {createContext, useContext, useEffect, useState} from 'react';
 import { useQuery } from '@tanstack/react-query';
 import {getUser} from '../api/authApi';
 
-
 const AuthContext = createContext();
 
 export const AuthProvider =({children}) => {
@@ -12,16 +11,13 @@ export const AuthProvider =({children}) => {
         queryKey: ['user'],
         queryFn: getUser,
         retry: 0
-})
+    })
 
-    useEffect(()=> {
+    useEffect(() => {
         if (userData) {
-            setUser({
-                id: userData.id,
-                username: userData.username
-            })
-        }
-    },[userData]);
+          setUser({ id: userData.id, username: userData.username });
+        } 
+      }, [userData]);
 
     const clientLogIn = (userData) => {
         setUser(userData);

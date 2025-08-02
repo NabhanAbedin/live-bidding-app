@@ -63,7 +63,7 @@ const logOut = asyncErrorHandler(async(req,res) => {
 
 const checkLogin = asyncErrorHandler(async(req,res,next)=> {
     const userId = req.userId;
-    const user = findUserById(Number(userId));
+    const user = await findUserById(Number(userId));
 
     return res.status(200).json(user);
 })

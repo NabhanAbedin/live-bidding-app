@@ -23,9 +23,10 @@ const getBidById = asyncErrorHandler(async(req,res)=> {
 
 const postBid = asyncErrorHandler(async(req,res)=> {
     const userId = req.userId;
-    const {bidItem,startingBid,category,duration} = req.body;
+    const {bidItem,startingBid,startingTime,category,duration} = req.body;
 
-    const bidId = await postBidModel(userId,bidItem,Number(startingBid),category,Number(duration));
+    const startingTimeString = `${startingTime.date}T${startingTime.time}:00.000Z`;
+    const bidId = await postBidModel(userId,bidItem,Number(startingBid),startingTimeString,category,Number(duration));
     //use the bid id for the client to redirect to the bid that they just posted
 
     return res.status(201).json({bidId: bidId});

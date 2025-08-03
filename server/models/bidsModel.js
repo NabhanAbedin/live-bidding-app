@@ -1,3 +1,4 @@
+const { s } = require('framer-motion/client');
 const prisma = require('../db');
 
 const getAllBidsModel = async (limit) => {
@@ -32,7 +33,7 @@ const searchBidsModel = async(query) => {
 }
 
 const getBidByIdModel = async (bidId) => {
-    const row = await prisma.bids.findMany({
+    const row = await prisma.bids.findUnique({
         where: {
             id: bidId
         },
@@ -43,6 +44,7 @@ const getBidByIdModel = async (bidId) => {
             highestBid: true,
             posted: true,
             bid_duration: true,
+            startTime: true,
             category: true,
             userId: true,
             bid_host: {
@@ -58,12 +60,13 @@ const getBidByIdModel = async (bidId) => {
     return row;
 }
 
-const postBidModel = async (userId,bidItem,startingBid,category,duration) => {
+const postBidModel = async (userId,bidItem,startingBid,startingTime,category,duration) => {
     const bidId = await prisma.bids.create({
         data: {
             userId: userId,
             bidItem: bidItem,
             startingBid: startingBid,
+            startTime: startingTime,
             category: category,
             bid_duration: duration
         },

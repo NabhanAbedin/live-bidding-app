@@ -32,9 +32,26 @@ const searchBidsModel = async(query) => {
 }
 
 const getBidByIdModel = async (bidId) => {
-    const row = await prisma.bids.findFirst({
+    const row = await prisma.bids.findMany({
         where: {
             id: bidId
+        },
+        select: {
+            id: true,
+            bidItem: true,
+            startingBid: true,
+            highestBid: true,
+            posted: true,
+            bid_duration: true,
+            category: true,
+            userId: true,
+            bid_host: {
+                select: {
+                    id: true,
+                    username: true,
+                }
+            },
+            bidSold: true
         }
     })
 

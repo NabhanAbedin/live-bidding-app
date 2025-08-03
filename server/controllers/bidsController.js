@@ -4,7 +4,7 @@ const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidMod
 
 const getBids = asyncErrorHandler(async(req,res) => {
     if (req.query.search) {
-        query = req.query.search;
+        const query = req.query.search;
         const searchBids = await searchBidsModel(query);
         return res.status(200).json(searchBids);
     }

@@ -27,6 +27,17 @@ const getFavoritesModel = async (userId) => {
       }));
 }
 
+const getFavoritesByIdModel = async (userId, bidId) => {
+    const row = await prisma.favorites.findMany({
+        where: {
+            bidId: bidId,
+            userId: userId
+        }
+    })
+
+    return row.length > 0;
+}
+
 const addToFavoritesModel = async (bidId,userId) => {
     const rows = await prisma.favorites.create({
         data: {
@@ -57,6 +68,7 @@ const deleteFavoritesModel = async (bidId,userId) => {
 
 module.exports = {
     getFavoritesModel,
+    getFavoritesByIdModel,
     addToFavoritesModel,
     deleteFavoritesModel
 }

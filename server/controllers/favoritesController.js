@@ -1,6 +1,6 @@
 const {asyncErrorHandler} = require('../middleware/errorMiddleware');
 const AppError = require('../utils/AppError');
-const {getFavoritesModel, addToFavoritesModel, deleteFavoritesModel } = require('../models/favoritesModel');
+const {getFavoritesModel, getFavoritesByIdModel, addToFavoritesModel, deleteFavoritesModel } = require('../models/favoritesModel');
 
 
 const getFavorites = asyncErrorHandler(async(req,res)=> {
@@ -15,6 +15,11 @@ const getFavorites = asyncErrorHandler(async(req,res)=> {
 const addToFavorites = asyncErrorHandler(async(req,res,next)=> {
     const userId = req.userId;
     const bidId = req.params.bidId;
+    const existing = await getFavoritesByIdModel(Number(bidId), Number(userId));
+
+    if (existing) {
+        return next(new AppError('already in favorites',409))
+    }
 
     const result = await addToFavoritesModel(Number(bidId), Number(userId));
 

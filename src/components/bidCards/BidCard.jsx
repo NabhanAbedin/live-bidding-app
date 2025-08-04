@@ -4,7 +4,7 @@ import '../../styles/bidcard.css';
 import formatDate from '../../utils/formatDate.js';
 import formatDuration from "../../utils/formatDuration.js";
 
-const BidCard = ({id, bidItem, startingBid, startTime, category, posted, bid_duration}) => {
+const BidCard = ({id, bidItem, startingBid, startTime, category, bid_duration, preview = false}) => {
     const navigate = useNavigate();
 
     const handleBidClick = () => {
@@ -12,7 +12,7 @@ const BidCard = ({id, bidItem, startingBid, startTime, category, posted, bid_dur
     }
 
     return (
-            <div className="bidcard-container" onClick={handleBidClick}>
+            <div className="bidcard-container" onClick={!preview && handleBidClick}>
             <div className="image-container">
                 <img src={placeholder} alt="" />
             </div>

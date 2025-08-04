@@ -3,7 +3,6 @@ import bidDateValidation from "../../utils/bidDateValidation.js";
 import { useQuery } from "@tanstack/react-query";
 
 const BidPageJoin = ({bid}) => {
-    console.log(bid.startTime);
     const validToJoin = useMemo(() => {
         if (!bid) return false;
         return bidDateValidation(bid.startTime, Number(bid.bid_duration));

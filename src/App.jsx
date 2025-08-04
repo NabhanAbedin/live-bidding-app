@@ -5,6 +5,9 @@ import Header from "./components/navigation/Header";
 import Login from "./components/authenticationPages/Login";
 import Register from "./components/authenticationPages/CreateAccount";
 import BidPage from "./components/bidPage/BidPage";
+import CreateBids from "./components/createBids/CreateBids";
+import { CreateBidsProvider } from "./context/createBidsContext";
+
 
 function App() {
     return (
@@ -15,6 +18,10 @@ function App() {
             <Route path={'bids'} element={<PostedBids/>} />
             <Route path={'/login'} element={<Login />} />
             <Route path={'/register'} element={<Register />} />
+            <Route path={'bids/create'} element={
+                <CreateBidsProvider>
+                     <CreateBids />
+                </CreateBidsProvider>} />
             <Route path={'bids/:bidId'} element={<BidPage />} />
         </Routes>
         </>

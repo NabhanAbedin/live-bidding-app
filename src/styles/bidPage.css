@@ -123,8 +123,8 @@ html, body {
 }
 
 .bid-button.disabled {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.5), rgba(247, 147, 30, 0.5));
-    color: rgba(255, 255, 255, 0.7);
+    background: #f0f0f0;
+    color: #999;
     cursor: not-allowed;
 }
 

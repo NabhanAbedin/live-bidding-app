@@ -1,0 +1,373 @@
+.create-bids-container {
+    padding: 1rem 2rem;
+    width: 100%;
+    height: calc(100vh - 60px);
+}
+
+.stepper-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.stepper-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.step-container {
+    height: 67%;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+}
+
+.stepper-wrapper:last-child {
+    flex: none;
+}
+
+.stepper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #f3f4f6;
+    color: #6b7280;
+    border: 2px solid #e5e7eb;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.step-circle.active {
+    background-color: #ff6b35;
+    color: white;
+    border-color: #ff6b35;
+}
+
+.step-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b7280;
+    text-align: center;
+    max-width: 120px;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.stepper-wrapper .stepper .step-label {
+    color: #6b7280;
+}
+
+.stepper-wrapper:has(.step-circle.active) .step-label {
+    color: #ff6b35;
+    font-weight: 600;
+}
+
+.step-connector {
+    height: 2px;
+    background-color: #e5e7eb;
+    flex: 1;
+    margin: 0 1rem;
+    margin-top: -20px;
+    transition: background-color 0.3s ease;
+}
+
+.step-connector.completed {
+    background-color: #ff6b35;
+}
+
+/* BidDetails specific styling */
+.image-insert-container {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    position: relative;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    min-height: 400px;
+}
+
+.image-insert-container:hover {
+    border-color: #9ca3af;
+    background-color: #f3f4f6;
+}
+
+.image-insert-container img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.image-insert-container:hover img {
+    opacity: 0.8;
+}
+
+.image-insert-container::after {
+    content: "Image upload not available";
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.image-insert-container:hover::after {
+    opacity: 1;
+}
+
+.inputs-container {
+    flex: 0 0 53%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 2rem;
+    justify-content: flex-start;
+    padding-top: 2rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-container h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0;
+}
+
+.input-container input,
+.input-container select {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #374151;
+    background-color: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-container input:focus,
+.input-container select:focus {
+    outline: none;
+    border-color: #ff6b35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.input-container select {
+    cursor: pointer;
+}
+
+.input-container select option {
+    padding: 0.5rem;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 2rem;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-primary {
+    background-color: #ff6b35;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #e55a2b;
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #e5e7eb;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .stepper-container {
+        padding: 1rem 0;
+    }
+
+    .step-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .image-insert-container {
+        flex: none;
+        min-height: 250px;
+    }
+
+    .inputs-container {
+        flex: none;
+        padding-left: 0;
+        padding-top: 0;
+    }
+
+    .step-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .step-label {
+        font-size: 11px;
+        max-width: 80px;
+    }
+
+    .step-connector {
+        margin: 0 0.5rem;
+        margin-top: -16px;
+    }
+
+    .buttons-container {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+.scheduling-inputs {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.scheduling {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.email-container {
+    display: flex;
+    gap: 0.75rem;
+    padding: 20px;
+    margin-top: 1.5rem;
+    font-size: 19px;
+    font-weight: 500;
+    color: #374151;
+    justify-content: center;
+}
+
+.email-container input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    accent-color: #ff6b35;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #e5e7eb;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.email-container input[type="checkbox"]:checked {
+    background-color: #ff6b35;
+}
+
+.email-input-box {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    gap: 10px;
+}
+.email-container input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.email-container input[type="checkbox"]:focus {
+    outline: 2px solid #ff6b35;
+    outline-offset: 2px;
+}
+
+/* Responsive design for scheduling */
+@media (max-width: 768px) {
+    .scheduling-inputs {
+        flex-direction: column;
+        width: 90%;
+        gap: 1.5rem;
+    }
+    
+    .input-container.scheduling h1 {
+        font-size: 16px;
+    }
+    
+    .input-container.scheduling input[type="number"] {
+        text-align: left;
+    }
+    
+    .email-container {
+        justify-content: flex-start;
+        padding: 0.75rem 0;
+        margin-top: 1rem;
+    }
+}

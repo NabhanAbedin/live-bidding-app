@@ -4,7 +4,7 @@ import '../../styles/bidcard.css';
 import formatDate from '../../utils/formatDate.js';
 import formatDuration from "../../utils/formatDuration.js";
 
-const BidCard = ({id, bidItem, startingBid, category, posted, bid_duration}) => {
+const BidCard = ({id, bidItem, startingBid, startTime, category, posted, bid_duration}) => {
     const navigate = useNavigate();
 
     const handleBidClick = () => {
@@ -19,7 +19,7 @@ const BidCard = ({id, bidItem, startingBid, category, posted, bid_duration}) => 
             <div className="text-container">
                 <h3>{bidItem}</h3>
                 <h4>starting at {startingBid}</h4>
-                <p>{formatDate(posted)}</p>
+                <p>{formatDate(startTime)}</p>
                 <p>{formatDuration(bid_duration)}</p>
                 <p className="category">{category}</p>
             </div>  

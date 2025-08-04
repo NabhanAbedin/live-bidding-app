@@ -66,9 +66,19 @@ const deleteFavoritesModel = async (bidId,userId) => {
      return true;
 }
 
+const deleteFavoritesForBidsModel = async (bidId) => {
+    const row = await prisma.favorites.deleteMany({
+        where: {
+            bidId: bidId
+        }
+    })
+    return row;
+}
+
 module.exports = {
     getFavoritesModel,
     getFavoritesByIdModel,
     addToFavoritesModel,
-    deleteFavoritesModel
+    deleteFavoritesModel,
+    deleteFavoritesForBidsModel
 }

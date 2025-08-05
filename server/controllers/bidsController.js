@@ -25,9 +25,9 @@ const getBidById = asyncErrorHandler(async(req,res)=> {
 
 const postBid = asyncErrorHandler(async(req,res)=> {
     const userId = req.userId;
-    const {bidItem,startingBid,startingTime,category,duration, clientTimeZone} = req.body;
+    const {bidItem,startingBid,startingDate, startingTime,category,duration, clientTimeZone} = req.body;
 
-    const startingTimeString = `${startingTime.date}T${startingTime.time}:00.000`;
+    const startingTimeString = `${startingDate}T${startingTime}:00.000`;
     const startingTimeNY = Temporal.PlainDateTime.from(startingTimeString);
     const startingTimeUTC = startingTimeNY.toZonedDateTime(clientTimeZone).toInstant();
 

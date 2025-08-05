@@ -7,6 +7,7 @@ import { logOut } from "../../api/authApi";
 const Nav = () => {
     const navigate = useNavigate();
     const {user, clientLogOut, authLoading} = useAuth();
+    console.log(user);
 
     const {mutate, isLoading, isError, error} =useMutation({
         mutationFn: logOut,

@@ -14,7 +14,10 @@ export const getUser = async () => {
 }
 
 export const logOut = async () => {
-    return fetch(`${API_BASE}/api/auth/logout`);
+    return fetch(`${API_BASE}/api/auth/logout`, {
+        method: 'POST',
+        credentials: 'include'
+    });
 }
 
 export const userLogin = async ({username, password}) => {

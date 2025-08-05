@@ -7,7 +7,7 @@ export const CreateBidsProvider = ({children}) => {
     const [formData, setFormData] = useState({
         bidItem: '',
         startingBid: '',
-        category: '',
+        category: 'ELECTRONICS',
         date: '',
         time: '',
         duration: '',

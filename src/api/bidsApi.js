@@ -31,3 +31,24 @@ export const fetchBidById = async (bidId) => {
 
     return json;
 }
+
+
+export const postBid = async ({bidItem, startingBid, date, time, category, duration}) => { 
+    const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const res = await fetch(`${API_BASE}/api/bids`, {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            bidItem,
+            startingBid,
+            startingDate: date,
+            startingTime: time,
+            category,duration,
+            clientTimeZone
+        })
+    }) ;
+
+}
+
+

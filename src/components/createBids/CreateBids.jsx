@@ -1,24 +1,48 @@
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 import "../../styles/createBids.css";
 import BidDetails from "./BidDetails";
 import { useCreateBidsContext } from "../../context/createBidsContext";
+import { useAuth } from "../../context/authContext";
 import Scheduling from "./Scheduling";
+import Publish from "./Publish";
+import { useNavigate } from "react-router-dom";
 
 const steps = ['Bid Details', 'Scheduling & Settings', 'Review & Publish'];
 
 const CreateBids = () => {
-    const {activeStep, handleNext, handlePrevious} = useCreateBidsContext();
+    const {user} = useAuth();
+    const {activeStep, handleNext, handlePrevious, formData} = useCreateBidsContext();
+    const navigate = useNavigate();
+
+    useEffect(() => {(!user && navigate('/login'))},[])
+
     
     const handleComponent = () => {
         if (activeStep === 1) {
             return <Scheduling />
         } else if (activeStep === 2) {
-            return;
+            return <Publish />
         } else {
             return <BidDetails/>
         }
-
     }
+
+    const isFormComplete = useCallback(
+        () =>
+          Object.values(formData).every(
+            (value) => value !== '' && value != null
+          ),
+        [formData]
+      );
+      
+    const handleNextClick = useCallback(() => {
+        console.log(formData);
+        if (activeStep === steps.length - 2 && !isFormComplete()) {
+          alert('Please fill out all fields before proceeding.');
+          return;
+        }
+        handleNext();
+      }, [activeStep, isFormComplete, handleNext]);
 
     return (
         <div className="create-bids-container">
@@ -48,18 +72,13 @@ const CreateBids = () => {
                 >
                     Previous
                 </button>
-                {activeStep !== steps.length - 1 ? (
-                    <button 
-                        className="btn btn-primary" 
-                        onClick={handleNext}
-                    >
-                        Next
-                    </button>
-                ) : (
-                    <button className="btn btn-primary">
-                        Post
-                    </button>
-                )}
+                <button 
+                className="btn btn-primary" 
+                onClick={handleNextClick}
+                disabled={activeStep === steps.length - 1}
+               >
+                Next
+                </button>
             </div>
         </div>
     )

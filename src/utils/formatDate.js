@@ -14,8 +14,13 @@ const months = {
 }
 
 const formatDate = (date) => {
-    const parts = date.split('T');
-    const dateParts = parts[0].split('-');
+    let dateParts;
+    if (date.includes('T')) {
+        const parts = date.split('T');
+        dateParts = parts[0].split('-');
+    } else {
+        dateParts = date.split('-');
+    }
     const year = dateParts[0];
     const month = months[dateParts[1]];
 

@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 const steps = ['Bid Details', 'Scheduling & Settings', 'Review & Publish'];
 
 const CreateBids = () => {
-    const {user} = useAuth();
+    const {user, authLoading} = useAuth();
     const {activeStep, handleNext, handlePrevious, formData} = useCreateBidsContext();
     const navigate = useNavigate();
 
-    useEffect(() => {(!user && navigate('/login'))},[])
+    useEffect(() => {
+        if (authLoading) return;
+        if (!user) navigate('/login');
+    },[user])
 
     
     const handleComponent = () => {

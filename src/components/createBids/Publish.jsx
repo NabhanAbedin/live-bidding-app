@@ -2,17 +2,19 @@ import { useCreateBidsContext } from "../../context/createBidsContext";
 import { postBid } from "../../api/bidsApi";
 import { Link, useNavigate } from "react-router-dom";
 import BidPreviewCard from "../bidCards/BidPreviewCard";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 
 const Publish = () => {
     const {formData} = useCreateBidsContext();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const {mutate, isLoading, isError, error} = useMutation({
         mutationFn: () => postBid(formData),
         onSuccess: () => {
             alert('posted bid');
+            queryClient.invalidateQueries(['bids']);
             navigate('/');
         }
     })

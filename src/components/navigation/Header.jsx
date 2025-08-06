@@ -1,5 +1,5 @@
 import Nav from "./nav";
-import SearchBids from "../searchBids/SearcBids";
+import SearchBids from "../searchBids/SearchBids";
 import '../../styles/Header.css';
 import { useState } from "react";
 import hambugerIcon from '../../assets/hamburgerIcon.png';

@@ -30,11 +30,14 @@ export const userLogin = async ({username, password}) => {
          password: password
         })
     })
+
+    const json = await res.json();
+
     if (!res.ok) {
         throw new Error(json.message);
     }
     
-    return res;
+    return json;
 
 }
 
@@ -48,9 +51,12 @@ export const userRegister = async ({username, password}) => {
          password: password
         })
     })
+    
+    const json = await res.json();
+
     if (!res.ok) {
         throw new Error(json.message);
     }
     
-    return res;
+    return json;
 }

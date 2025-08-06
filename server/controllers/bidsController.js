@@ -4,10 +4,11 @@ const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidMod
 const {deleteFavoritesForBidsModel} = require('../models/favoritesModel');
 const {Temporal} = require('@js-temporal/polyfill');
 
-const getBids = asyncErrorHandler(async(req,res) => {
+const getBids = asyncErrorHandler(async(req,res,next) => {
     if (req.query.search) {
         const query = req.query.search;
         const searchBids = await searchBidsModel(query);
+        if (searchBids.length  === 0) return next(new AppError(`No bids found with ${query}`, 404));
         return res.status(200).json(searchBids);
     }
     const limit = req.query.limit ? Number(req.query.limit) : undefined;

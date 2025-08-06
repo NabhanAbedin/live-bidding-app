@@ -38,10 +38,51 @@ const addToCollectionModel = async (bidId, userId) => {
     return row;
 }
 
+const collectionsTotalSpentModel = async (userId) => {
+    const row = await prisma.bids.aggregate({
+        where: {
+            collections: {
+                some: {
+                   userId: userId
+                }
+            }
+        },
+        _sum: {
+            bidSold: true
+        }
+    })
+
+    return row;
+}
+
+const collectionsCategorizedModel = async (userId) => {
+    const rows = await prisma.bids.groupBy({
+        by: ['category'],
+        where: {
+            collections: {
+                some: {
+                    userId: userId
+                }
+            }
+        },
+        _sum: {
+            bidSold: true
+        }
+    })
+
+    return rows.reduce((acc, { category, _sum: { bidSold } }) => {
+        acc[category] = bidSold ?? 0;
+        return acc;
+      }, {});
+
+}
+
 
 
 
 module.exports = {
     getCollectionModel,
-    addToCollectionModel
+    addToCollectionModel,
+    collectionsTotalSpentModel,
+    collectionsCategorizedModel
 }

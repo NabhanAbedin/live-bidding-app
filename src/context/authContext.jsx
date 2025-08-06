@@ -12,15 +12,18 @@ export const AuthProvider =({children}) => {
         queryFn: getUser,
         retry: 0
     })
+    console.log(user);
 
     useEffect(() => {
         if (userData) {
-          setUser({ id: userData.id, username: userData.username });
-        } 
-      }, [userData]);
+          setUser({ id: userData.id, username: userData.username, currency: userData.currency });
+        } else if (isError && !authLoading && !userData) {
+            setUser(null);
+        }
+      }, [userData, isError, authLoading]);
 
     const clientLogIn = (userData) => {
-        setUser(userData);
+        setUser({ id: userData.id, username: userData.username, currency: userData.currency });
     }
 
     const clientLogOut = () => {

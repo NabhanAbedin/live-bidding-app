@@ -38,7 +38,7 @@ const findUserById = async (id) => {
         select: {
             id: true,
             username: true,
-            passwordHash: true,
+            currency: true
         },
         where: {
             id: Number(id)

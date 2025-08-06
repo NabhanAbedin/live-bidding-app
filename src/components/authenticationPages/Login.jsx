@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -13,17 +13,26 @@ const Login = () => {
         username: '',
         password: ''
     })
-    const {clientLogIn} = useAuth();
+    const {user,clientLogIn, authLoading} = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (authLoading) return;
+        if (user) navigate('/');
+    },[user])
 
     const {mutate, isLoading, isError, error} = useMutation({
         mutationFn: () => userLogin(formData),
-        onSuccess: () => {
-            clientLogIn(formData);
+        onSuccess: (userPayload) => {
+            clientLogIn(userPayload);
             navigate('/')
         }
     }
     )
+
+    if (error) {
+        console.log(error);
+    }
     const handleSubmit = async e => {
         e.preventDefault();
         mutate();

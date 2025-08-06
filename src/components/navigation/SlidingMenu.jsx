@@ -31,7 +31,7 @@ const SlidingMenu = ({active, setActive})  => {
                 Bids
             </button>
             </Link>
-            <Link to={'/users/collections'}  className="nav-link">
+            <Link to={'/collections'}  className="nav-link">
             <button className="slidemenu-button">
                 Collections
             </button>

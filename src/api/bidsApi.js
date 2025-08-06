@@ -1,12 +1,15 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchBids = async (search) => {
+    console.log(search);
     if (search.trim() == '' || !search) {
     const res = await fetch(`${API_BASE}/api/bids`);
     return res.json();
     }
-    console.log(search);
     const res = await fetch(`${API_BASE}/api/bids?search=${encodeURIComponent(search)}`);
+    if (!res.ok) {
+        throw new Error(json.message);
+    }
     return res.json();
 }
 

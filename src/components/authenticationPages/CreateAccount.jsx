@@ -18,8 +18,8 @@ const Register = () => {
 
     const {mutate, isLoading, isError, error} = useMutation({
         mutationFn: () => userRegister(formData),
-        onSuccess: () => {
-            clientLogIn(formData);
+        onSuccess: (userPayload) => {
+            clientLogIn(userPayload);
             navigate('/')
         }
     }

@@ -65,7 +65,7 @@ const checkLogin = asyncErrorHandler(async(req,res,next)=> {
     const userId = req.userId;
     const user = await findUserById(Number(userId));
 
-    return res.status(200).json(user);
+    return res.status(200).json({id: user.id, username: user.username, currency: user.currency});
 })
 
 module.exports = {

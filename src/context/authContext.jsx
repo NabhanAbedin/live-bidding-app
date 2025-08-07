@@ -12,7 +12,6 @@ export const AuthProvider =({children}) => {
         queryFn: getUser,
         retry: 0
     })
-    console.log(user);
 
     useEffect(() => {
         if (userData) {

@@ -12,11 +12,12 @@ const Publish = () => {
 
     const {mutate, isLoading, isError, error} = useMutation({
         mutationFn: () => postBid(formData),
-        onSuccess: () => {
+        onSuccess: (bidId) => {
             alert('posted bid');
             queryClient.invalidateQueries(['bids']);
-            navigate('/');
-        }
+            navigate(`/bids/${bidId}`);
+        },
+        retry: 0
     })
     const handleSubmit = (e) => {
         e.preventDefault();

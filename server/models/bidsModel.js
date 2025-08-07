@@ -75,7 +75,7 @@ const postBidModel = async (userId,bidItem,startingBid,startingTime,category,dur
         }
     })
 
-    return bidId;
+    return bidId.id;
 }
 
 const deleteBidModel = async (bidId, userId) => {

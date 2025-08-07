@@ -50,7 +50,16 @@ export const postBid = async ({bidItem, startingBid, date, time, category, durat
             category,duration,
             clientTimeZone
         })
-    }) ;
+    });
+
+    const json = await res.json();
+
+    if (!res.ok) {
+        throw new Error(json.message);
+    }
+    console.log(json);
+    console.log(json.bidId);
+    return json.bidId;
 
 }
 

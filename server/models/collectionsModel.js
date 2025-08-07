@@ -11,10 +11,8 @@ const getCollectionModel = async (userId) => {
             bids: {
                 select: {
                     bidItem: true,
-                    startingBid: true,
-                    highestBid: true,
-                    posted: true,
-                    bid_duration: true
+                    bidSold: true,
+                    startTime: true,
                 }
             }
         }
@@ -52,7 +50,7 @@ const collectionsTotalSpentModel = async (userId) => {
         }
     })
 
-    return row;
+    return row._sum.bidSold;
 }
 
 const collectionsCategorizedModel = async (userId) => {

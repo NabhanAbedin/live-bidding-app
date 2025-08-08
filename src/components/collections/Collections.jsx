@@ -4,20 +4,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import { fetchCollections } from "../../api/collectionsApi";
 import '../../styles/collections.css';
 import { useEffect } from "react";
+import CollectionBidCard from "../bidCards/CollectionBidCard";
+import BarChart from "./CategoryChart";
 
 const Collections = () => {
     const {user, authLoading} = useAuth();
     const {userId: paramUserId} = useParams();
     const navigate = useNavigate();
 
-    console.log(user);
     const userId = paramUserId ?? user?.id;
-    
+
     useEffect(() => {
         if (authLoading) return;
         if (!user) navigate('/login');
     },[user])
-    
+
     const {data, isFetching, Error} = useQuery({
         queryKey: ['collections', userId],
         queryFn: () => fetchCollections(userId),
@@ -26,13 +27,24 @@ const Collections = () => {
 
     return (
         <div className="collections-container">
-           <div className="collections-grid">
-                {data && data.collection.map(c => (
-                    <div key={c.id}>
-                        {/* Your component content here */}
-                    </div>
+           {data && (
+            <>
+              <div className="collections-grid">
+                {data.collection.map(c => (
+                   <CollectionBidCard {...c} />
                 ))}
-           </div>
+              </div>
+            <div className="stats-container">
+                <div className="graph-container">
+                    <BarChart categoryData={data.categorizedSpent} />
+                </div>
+                <div className="spent-container">
+                    <h3>Total Spent on bids</h3>
+                    <p>{data.totalSpent} currency</p>
+                </div>
+            </div>
+            </>
+           )}
         </div>
     )
 }

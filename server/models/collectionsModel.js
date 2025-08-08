@@ -6,13 +6,13 @@ const getCollectionModel = async (userId) => {
             userId: userId
         },
         select: {
-            id: true,
             bidId: true,
             bids: {
                 select: {
                     bidItem: true,
                     bidSold: true,
                     startTime: true,
+                    category: true
                 }
             }
         }

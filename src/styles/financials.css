@@ -13,12 +13,18 @@
 
 .currency-container {
     display: flex;
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    background: linear-gradient(135deg, #ff9a56, #ff6b35);
     flex-direction: column;
     height: 200px;
     width: 450px;
     border-radius: 30px;
     z-index: 10;
+}
+
+.bidsold-container {
+    display: flex;
+    font-size: 23px;
+    align-items: center;
 }
 
 .wallet-header {
@@ -57,7 +63,7 @@
 
 .transaction {
     display: flex;
-    background: linear-gradient(135deg, #f97246, #f07e0c);
+    background: linear-gradient(135deg, #ff9a56, #ff6b35);
     padding: 10px;
     border-radius: 15px;
 }
@@ -66,15 +72,213 @@
     flex: 2;
 }
 
-.bidsold-container {
-    flex: 2;
+.purchase-form-container {
     display: flex;
-    justify-content: end;
-    align-items: center;
-    font-size: 23px;
+    gap: 10px;
+    justify-content: center;
 }
 
-.buy-currency-container {
+.statistics-container {
     flex: 2;
     background-color: lightblue;
+}
+.purchase-form-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.currency-purchase-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 420px;
+    padding: 24px;
+    background: linear-gradient(135deg, #ff9a56, #ff6b35);
+    border-radius: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.currency-purchase-container.selected {
+    border-color: #ffffff;
+}
+
+.img-container {
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.img-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.currency-purchase-container h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+}
+
+.currency-purchase-container p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.buy-now-container {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+}
+
+.buy-now-container button {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #ffffff;
+    color: #ff6b35;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.buy-now-container button:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .purchase-form-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .purchase-form-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .currency-purchase-container {
+        height: 380px;
+    }
+}
+
+.purchase-confirm-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 700px;
+    height: 400px;
+    background-color:white;
+    border-radius: 16px;
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.confirm-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.confirm-image-container img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+}
+
+.confirm-text {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+.confirm-text button:first-child {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.confirm-text h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.confirm-text label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+}
+
+.confirm-text input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.confirm-text button[type="submit"] {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff9a56, #ff6b35);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.confirm-text button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.terms-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    gap: 5px;
 }

@@ -9,10 +9,6 @@ const MyWallet = ({user, authLoading}) => {
         enabled: !authLoading && Boolean(user)
     })
 
-    if (data) {
-        console.log(data.transactions);
-    }
-
     return (
         <div className="myWallet-container">
             {data && (
@@ -28,8 +24,8 @@ const MyWallet = ({user, authLoading}) => {
                 </div>
                 <div className="transactions-container">
                     <h2>Recent Transactions</h2>
-                    {data.transactions.map(transaction => (
-                        <div className="transaction">
+                    {data.transactions.map((transaction,index) => (
+                        <div className="transaction" key={index}>
                             <div className="bid-info">
                                 <h3>{transaction.bidItem}</h3>
                                 <p>{formatDate(transaction.startTime)}</p>

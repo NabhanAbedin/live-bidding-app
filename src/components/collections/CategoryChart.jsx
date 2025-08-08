@@ -61,7 +61,7 @@ const BarChart = ({ categoryData }) => {
         font: {
           family: "Poppins",
           size: 18, 
-          weight: "bold"
+          weight: "bold",
         },
         padding: {
           top: 10,
@@ -80,7 +80,7 @@ const BarChart = ({ categoryData }) => {
     },
   };
 
-  return <Bar data={chartData} options={options} width={200} height={200} />;
+  return <Bar data={chartData} options={options} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default BarChart;

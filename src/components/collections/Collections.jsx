@@ -31,7 +31,7 @@ const Collections = () => {
             <>
               <div className="collections-grid">
                 {data.collection.map(c => (
-                   <CollectionBidCard {...c} />
+                   <CollectionBidCard key={c.id} {...c} />
                 ))}
               </div>
             <div className="stats-container">

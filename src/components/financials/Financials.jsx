@@ -4,6 +4,7 @@ import MyWallet from "./MyWallet";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import '../../styles/financials.css';
+import PurchaseCurrency from "./PurchaseCurrency";
 
 
 const Financials = () => {
@@ -17,12 +18,16 @@ const Financials = () => {
     },[user,authLoading])
 
     return (
+        <>
         <div className="financials-container">
             <MyWallet user={user} authLoading={authLoading}/>
-            <div className="buy-currency-container">
+            <div className="statistics-container">
         
             </div>
+           
         </div>
+         <PurchaseCurrency />
+        </>
     )
 }
 

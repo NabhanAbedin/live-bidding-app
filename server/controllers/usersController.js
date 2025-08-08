@@ -1,6 +1,6 @@
 const {asyncErrorHandler} = require('../middleware/errorMiddleware');
 const AppError = require('../utils/AppError');
-const {updateCurrency, getCurrency} = require('../models/usersModel');
+const {updateCurrency, getCurrency, recentTransactions} = require('../models/usersModel');
 
 const updateFinancials = asyncErrorHandler(async(req,res,next)=> {
     const currency = req.body.currency;
@@ -21,8 +21,21 @@ const updateFinancials = asyncErrorHandler(async(req,res,next)=> {
     return res.status(200).json({message: 'updated currency amount'})
 })
 
+const getFinancials = asyncErrorHandler(async (req,res,next) => {
+    const userId = req.userId;
+    const currentCurrency = await getCurrency(Number(userId));
+    const transactions = await recentTransactions(Number(userId));
+
+    if (!transactions) {
+        return next(new AppError('User has not bought any bids', 404));
+    }
+
+    return res.status(200).json({currentCurrency,transactions});
+
+})
 
 module.exports = {
-    updateFinancials
+    updateFinancials,
+    getFinancials
 }
 

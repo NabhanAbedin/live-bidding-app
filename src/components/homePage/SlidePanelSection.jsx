@@ -14,7 +14,6 @@ const SlidePanelSection = () => {
     if (error)      return <div>Slideshow failed to load</div>;
     if (isFetching) return //<Loading label={'slideshow'}/>
     if (error) return //<Error label={'slideshow'} />
-    console.log(bids);
 
     return (
        <>

@@ -16,7 +16,7 @@ const Collections = () => {
 
     useEffect(() => {
         if (authLoading) return;
-        if (!user) navigate('/login');
+        if (!userId) navigate('/login');
     },[user])
 
     const {data, isFetching, Error} = useQuery({

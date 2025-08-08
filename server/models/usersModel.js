@@ -28,8 +28,34 @@ const getCurrency = async (userId) => {
 
     return row.currency;
 }
+
+const recentTransactions = async (userId) => {
+    const row = await prisma.collections.findMany({
+        where: {
+            userId: userId
+        },
+        select: {
+            bids: {
+                select: {
+                    bidItem: true,
+                    bidSold: true,
+                    startTime: true
+                }
+            }
+        },
+        take: 5
+    })
+
+    return row.map(entry => ({
+        bidItem: entry.bids.bidItem,
+        bidSold: entry.bids.bidSold,
+        startTime: entry.bids.startTime
+    }));
+}
+
 module.exports = {
     updateCurrency,
-    getCurrency
+    getCurrency,
+    recentTransactions
 
 }

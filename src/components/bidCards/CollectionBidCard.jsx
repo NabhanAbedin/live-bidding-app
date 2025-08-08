@@ -4,7 +4,6 @@ import '../../styles/bidcard.css';
 
 
 const CollectionBidCard = ({bidId, bidItem, bidSold, startTime, category}) => {
-    console.log(bidId, bidItem, bidSold, startTime);
     return (
         <>
         <div className="bidcard-container collections-card" key={bidId}>

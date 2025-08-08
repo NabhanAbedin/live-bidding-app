@@ -8,6 +8,7 @@ import BidPage from "./components/bidPage/BidPage";
 import CreateBids from "./components/createBids/CreateBids";
 import { CreateBidsProvider } from "./context/createBidsContext";
 import Collections from "./components/collections/Collections";
+import Financials from "./components/financials/Financials";
 
 
 function App() {
@@ -19,13 +20,14 @@ function App() {
             <Route path={'/bids'} element={<PostedBids/>} />
             <Route path={'/login'} element={<Login />} />
             <Route path={'/register'} element={<Register />} />
-            <Route path={'bids/create'} element={
+            <Route path={'/bids/create'} element={
                 <CreateBidsProvider>
                      <CreateBids />
                 </CreateBidsProvider>} />
-            <Route path={'bids/:bidId'} element={<BidPage />} />
-            <Route path={'collections'} element={<Collections />} />
-            <Route path={'collections/:userId'} element={<Collections />} />
+            <Route path={'/bids/:bidId'} element={<BidPage />} />
+            <Route path={'/collections'} element={<Collections />} />
+            <Route path={'/collections/:userId'} element={<Collections />} />
+            <Route path={'/financials'} element={<Financials />} />
         </Routes>
         </>
     )

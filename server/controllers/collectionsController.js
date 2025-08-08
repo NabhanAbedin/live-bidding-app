@@ -6,10 +6,11 @@ const {getCollectionModel, addToCollectionModel, collectionsTotalSpentModel, col
 const getCollection = asyncErrorHandler( async(req,res,next) => {
     const userId = req.params.userId;
     const collection = await getCollectionModel(Number(userId));
-    const totalSpent = await collectionsTotalSpentModel(Number(userId));
-    const categorizedSpent = await collectionsCategorizedModel(Number(userId));
 
     if (collection.length === 0) return next(new AppError('Collection empty', 404));
+    
+    const totalSpent = await collectionsTotalSpentModel(Number(userId));
+    const categorizedSpent = await collectionsCategorizedModel(Number(userId));
 
     return res.status(200).json({collection, totalSpent, categorizedSpent});
 })

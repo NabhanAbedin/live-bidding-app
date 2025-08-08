@@ -36,7 +36,7 @@ const SlidingMenu = ({active, setActive})  => {
                 Collections
             </button>
             </Link>
-            <Link to={'/users/financials'}  className="nav-link">
+            <Link to={'/financials'}  className="nav-link">
             <button className="slidemenu-button">
                 Financials
             </button>

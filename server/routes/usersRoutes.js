@@ -15,5 +15,6 @@ router.use('/favorites', authMiddleware, favoritesRoutes)
 router
     .route('/financials')
     .patch(authMiddleware,ctrl.updateFinancials)
+    .get(authMiddleware,ctrl.getFinancials);
 
 module.exports = router;

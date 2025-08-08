@@ -4,13 +4,16 @@ import { useCallback } from "react";
 
 const PurchaseConfirm = ({purchaseAmount, purchaseImg, setConfirm}) => {
     const queryClient = useQueryClient();
-    
+
     const {mutate: purchase, isLoading, Error} = useMutation({
         mutationFn: () => updateFinancials(purchaseAmount),
         onSuccess: () => {
            alert('added to account');
            setConfirm(null);
-           queryClient.invalidateQueries({queryKey: ['myWallet']})
+           queryClient.invalidateQueries({queryKey: ['myWallet']});
+           requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
         }
     })
 

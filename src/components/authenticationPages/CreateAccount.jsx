@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
 import { userRegister } from "../../api/authApi";
-import FormInput from "./FormInput";
 import '../../styles/authenticationPages.css';
 import InvalidCredentials from "./InvalidCredentials";
 
@@ -11,7 +10,8 @@ import InvalidCredentials from "./InvalidCredentials";
 const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     })
     const {clientLogIn} = useAuth();
     const navigate = useNavigate();
@@ -26,7 +26,11 @@ const Register = () => {
     )
     const handleSubmit = async e => {
         e.preventDefault();
-        mutate();
+        if (formData.password.trim() === formData.confirmPassword.trim()) {
+            mutate();
+        } else {
+            alert('passwords dont match');
+        }
     }
 
     const handleChange = e => {
@@ -43,8 +47,36 @@ const Register = () => {
             <div className="form-header">
                 <h1>Create Account</h1>
             </div>
-           <FormInput name={'username'} valueType={formData.username} handleChange={handleChange} />
-           <FormInput name={'password'} valueType={formData.password} handleChange={handleChange} />
+            <div>
+                <label htmlFor={'username'}>Username:</label>
+                <input 
+                type="text"
+                id='username'
+                name='username'
+                value={formData.username}
+                onChange={handleChange}
+                    />     
+            </div>
+            <div>
+                <label htmlFor={'password'}>Password:</label>
+                <input 
+                type="password"
+                id='password'
+                name='password'
+                value={formData.password}
+                onChange={handleChange}
+                    />     
+            </div>
+            <div>
+                <label htmlFor={'confirmPassword'}>Confirm password:</label>
+                <input 
+                type="password"
+                id='password'
+                name='confirmPassword'
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                    />     
+            </div>
           <button type="submit">Create account</button>
           <div className="create-container">
             <p>Have an account? log in <Link to='/login'>

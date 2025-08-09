@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../../context/authContext";
 import { useNavigate, Link } from "react-router-dom";
 import { userLogin } from "../../api/authApi";
-import FormInput from "./FormInput";
 import '../../styles/authenticationPages.css';
 import InvalidCredentials from "./InvalidCredentials";
 
@@ -52,8 +51,26 @@ const Login = () => {
             <div className="form-header">
                 <h1>Log in</h1>
             </div>
-           <FormInput name={'username'} valueType={formData.username} handleChange={handleChange} />
-           <FormInput name={'password'} valueType={formData.password} handleChange={handleChange} />
+            <div>
+                <label htmlFor={'username'}>Username:</label>
+                <input 
+                type="text"
+                id='username'
+                name='username'
+                value={formData.username}
+                onChange={handleChange}
+                    />     
+            </div>
+            <div>
+                <label htmlFor={'password'}>Password:</label>
+                <input 
+                type="password"
+                id='password'
+                name='password'
+                value={formData.password}
+                onChange={handleChange}
+                    />     
+            </div>
           <button type="submit">Log in</button>
           <div className="create-container">
             <p>Dont Have an account with us? create one <Link to='/register'>

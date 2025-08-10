@@ -13,6 +13,8 @@ export const AuthProvider =({children}) => {
         retry: 0
     })
 
+    console.log(user);
+
     useEffect(() => {
         if (userData) {
           setUser({ id: userData.id, username: userData.username, currency: userData.currency });

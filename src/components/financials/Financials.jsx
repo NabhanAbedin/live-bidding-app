@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import '../../styles/financials.css';
 import PurchaseCurrency from "./PurchaseCurrency";
+import Statistics from "./Statistics";
 
 
 const Financials = () => {
@@ -22,9 +23,8 @@ const Financials = () => {
         <div className="financials-container">
             <MyWallet user={user} authLoading={authLoading}/>
             <div className="statistics-container">
-        
+                <Statistics user={user} authLoading={authLoading} />
             </div>
-           
         </div>
          <PurchaseCurrency />
         </>

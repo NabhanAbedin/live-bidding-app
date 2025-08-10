@@ -47,7 +47,7 @@
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 1px solid #e9ecef;
-    color: black;
+    color: rgb(242, 241, 241);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,10 +61,7 @@
     border-color: #cbd5e1;
 }
 
-.spent-container h3,
-.spent-container p {
-    color: black;
-}
+
 
 .spent-container .title {
     font-size: 20px;

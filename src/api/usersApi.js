@@ -30,3 +30,16 @@ export const getFinancials = async () => {
 
     return json;
 }
+
+export const getStatistics = async () => {
+    const res = await fetch(`${API_BASE}/api/users/financials/statistics`, {
+        credentials: 'include'
+    })
+
+    const json = await res.json();
+    if (!res.ok) {
+        throw new Error(json.message);
+    }
+    
+    return json;
+}

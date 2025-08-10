@@ -55,7 +55,17 @@ const deleteBid = asyncErrorHandler(async(req,res,next)=> {
 const updateBid = asyncErrorHandler(async(req,res,next) => {
     const userId = req.userId;
     const bidId = req.params.bidId;
-    const updatedData = req.body;
+    const data = req.body;
+
+    const updatedData = Object.entries(data).reduce((acc, [key, val]) => {
+        if (key === 'startingBid' || key === 'bid_duration') {
+          const n = Number(val);
+            acc[key] = n;
+        } else {
+          acc[key] = val;
+        }
+        return acc;
+      }, {});
 
     const updatedBid = await updateBidModel(Number(bidId), Number(userId), updatedData);
 

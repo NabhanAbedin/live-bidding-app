@@ -1,6 +1,7 @@
 const {asyncErrorHandler} = require('../middleware/errorMiddleware');
 const AppError = require('../utils/AppError');
-const {updateCurrency, getCurrency, recentTransactions} = require('../models/usersModel');
+const {updateCurrency, getCurrency, recentTransactions, totalEarnedModel, addTransaction} = require('../models/usersModel');
+const {collectionsTotalSpentModel, collectionsCategorizedModel} = require('../models/collectionsModel');
 
 const updateFinancials = asyncErrorHandler(async(req,res,next)=> {
     const currency = req.body.currency;
@@ -13,8 +14,9 @@ const updateFinancials = asyncErrorHandler(async(req,res,next)=> {
     }
 
     const updatedCurrency = await updateCurrency(Number(currency), Number(userId));
+    const storeTransaction = await addTransaction(Number(userId), Number(currency));
 
-    if (!updatedCurrency) {
+    if (!updatedCurrency || !storeTransaction) {
         return next(new AppError('could not update currency amount', 500))
     }
 
@@ -34,8 +36,20 @@ const getFinancials = asyncErrorHandler(async (req,res,next) => {
 
 })
 
+const getStatistics = asyncErrorHandler(async(req,res) => {
+    const userId = req.userId;
+
+    const totalSpent = await collectionsTotalSpentModel(Number(userId));
+    const totalEarned = await totalEarnedModel(Number(userId));
+    const categorizedSpent = await collectionsCategorizedModel(Number(userId));
+    
+    return res.status(200).json({totalSpent,totalEarned,categorizedSpent});
+})
+
+
 module.exports = {
     updateFinancials,
-    getFinancials
+    getFinancials,
+    getStatistics
 }
 

@@ -57,10 +57,22 @@ export const postBid = async ({bidItem, startingBid, date, time, category, durat
     if (!res.ok) {
         throw new Error(json.message);
     }
-    console.log(json);
-    console.log(json.bidId);
-    return json.bidId;
 
+    return json.bidId;
 }
 
+export const deleteBid =  async (bidId) => {
+    console.log(bidId);
+    const res = await fetch(`${API_BASE}/api/bids/${bidId}`, {
+        method: 'DELETE',
+        credentials: 'include'
+    })
+
+    const json = await res.json();
+    if (!res.ok) {
+        throw new Error(json.message);
+    }
+
+    return res;
+}
 

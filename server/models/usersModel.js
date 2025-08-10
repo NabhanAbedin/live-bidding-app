@@ -53,9 +53,39 @@ const recentTransactions = async (userId) => {
     }));
 }
 
+const totalEarnedModel = async (userId) => {
+    const row = await prisma.bids.aggregate({
+        where: {
+            userId: userId,
+            bidSold: {
+                not: null
+            }
+        },
+        _sum: {
+            bidSold: true
+        }
+    })
+
+   return  row._sum.bidSold ? row._sum.bidSold : 0;
+}
+
+const addTransaction = async (userId,amount) => {
+    const row = await prisma.transactions.create({
+        data: {
+            userId: userId,
+            transactionAmount: amount
+        }
+    })
+
+    return row;
+}
+
+
 module.exports = {
     updateCurrency,
     getCurrency,
-    recentTransactions
+    recentTransactions,
+    totalEarnedModel,
+    addTransaction,
 
 }

@@ -79,7 +79,7 @@ const postBidModel = async (userId,bidItem,startingBid,startingTime,category,dur
 }
 
 const deleteBidModel = async (bidId, userId) => {
-    const result = await prisma.bids.deleteMany({
+    const result = await prisma.bids.delete({
         where: {
             id: bidId,
             userId: userId

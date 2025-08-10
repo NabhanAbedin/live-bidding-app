@@ -52,11 +52,10 @@ const addToFavoritesModel = async (bidId,userId) => {
      return true;
 }
 
-const deleteFavoritesModel = async (bidId,userId) => {
+const deleteFavoritesModel = async (bidId) => {
     const rows = await prisma.favorites.delete({
         where: {
             bidId: bidId,
-            userId: userId
         }
     })
 

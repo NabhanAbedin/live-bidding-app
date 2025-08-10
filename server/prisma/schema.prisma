@@ -18,6 +18,7 @@ model users {
   collections  collections[]
   chats        chats[]
   favorites    favorites[]
+  transactions transactions[]
 }
 
 model bids {
@@ -63,6 +64,14 @@ model favorites {
   userId Int
   users  users @relation(fields: [userId], references: [id])
   bids   bids  @relation(fields: [bidId], references: [id])
+}
+
+model transactions {
+  id Int @id @default(autoincrement())
+  userId Int 
+  transactionAmount Int
+  transactionDate DateTime @default(now())
+  users  users @relation(fields: [userId], references: [id])
 }
 
 enum Category {

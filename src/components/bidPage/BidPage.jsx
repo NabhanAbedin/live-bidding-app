@@ -6,17 +6,20 @@ import formatDuration from "../../utils/formatDuration.js";
 import { fetchBidById } from "../../api/bidsApi.js";
 import formatTime from "../../utils/formatTime.js";
 import { useMemo } from "react";
+import { useAuth } from "../../context/authContext.jsx";
 import BidPageJoin from "./BidPageJoin.jsx";
 import BidPageFavorites from "./BidPageFavorites.jsx";
+import DeleteBid from "./DeleteBid.jsx";
 import '../../styles/bidPage.css';
 
 const BidPage = () => {
     const {bidId} = useParams();
+    const {user} = useAuth();
     const {data: bid, isFetching, error} = useQuery({
         queryKey: ['bids', bidId],
         queryFn: () => fetchBidById(bidId)
     })
-    
+
     const formattedTime = useMemo(() => { 
        if (!bid) return { date: '', time: '' };
        return formatTime(bid.startTime);
@@ -42,8 +45,18 @@ const BidPage = () => {
                     </div>
                 </div>
                 <div className="bid-buttons">
+                {!user || user.id !== bid.userId && (
+                    <>
                     <BidPageFavorites bid={bid} bidId={bidId} />
                     <BidPageJoin bid={bid}/>
+                    </>
+                )}
+                {user && user.id === bid.userId && (
+                    <>
+                     <DeleteBid bidId={bidId} />
+                    </>
+                )}
+
                 </div>
             </div>
         

@@ -12,11 +12,11 @@ const Financials = () => {
     const {user, authLoading} = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!user && !authLoading) {
-            navigate('/login');
-        }
-    },[user,authLoading])
+    useEffect(() => {     
+        if (authLoading) return;
+        if (!user) navigate('/login');
+    },[user]);
+
 
     return (
         <>

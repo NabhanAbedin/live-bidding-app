@@ -1,17 +1,19 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToFavorites } from "../../api/favoritesApi";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
 
-const BidPageFavorites = ({bid, bidId}) => {
+const BidPageFavorites = ({bidId}) => {
+    const qc = useQueryClient();
     const {user} = useAuth();
     const navigate = useNavigate();
 
     const {mutate, isLoading, error } = useMutation({
         mutationFn: () => addToFavorites(bidId),
         onSuccess: () => {
-            alert('added to favorites');
+            qc.invalidateQueries({queryKey: ['bids', bidId]})
+            qc.invalidateQueries({queryKey: ['favorites']})
         }
     })
 

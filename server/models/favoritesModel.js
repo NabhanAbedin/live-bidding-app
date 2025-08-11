@@ -14,6 +14,7 @@ const getFavoritesModel = async (userId) => {
                     startingBid: true,
                     highestBid: true,
                     posted: true,
+                    category: true,
                     bid_duration: true
                 }
             }
@@ -53,7 +54,7 @@ const addToFavoritesModel = async (bidId,userId) => {
 }
 
 const deleteFavoritesModel = async (bidId) => {
-    const rows = await prisma.favorites.delete({
+    const rows = await prisma.favorites.deleteMany({
         where: {
             bidId: bidId,
         }
@@ -74,10 +75,22 @@ const deleteFavoritesForBidsModel = async (bidId) => {
     return row;
 }
 
+const checkFavoriteByBidModel = async (bidId, userId) => {
+    const row = await prisma.favorites.findMany({
+        where: {
+            bidId: bidId,
+            userId: userId
+        }
+    })
+
+    return  row.length !== 0;
+}
+
 module.exports = {
     getFavoritesModel,
     getFavoritesByIdModel,
     addToFavoritesModel,
     deleteFavoritesModel,
-    deleteFavoritesForBidsModel
+    deleteFavoritesForBidsModel,
+    checkFavoriteByBidModel
 }

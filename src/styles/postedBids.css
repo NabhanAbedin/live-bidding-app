@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+h1 {
+   margin-left:  20px;
+   margin-top: 10px;
+}
 /* Responsive breakpoints */
 @media (max-width: 768px) {
     .postedbids-grid {

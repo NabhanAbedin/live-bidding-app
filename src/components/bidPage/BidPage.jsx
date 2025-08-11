@@ -10,6 +10,7 @@ import { useAuth } from "../../context/authContext.jsx";
 import BidPageJoin from "./BidPageJoin.jsx";
 import BidPageFavorites from "./BidPageFavorites.jsx";
 import DeleteBid from "./DeleteBid.jsx";
+import DeleteFavorites from "./DeleteFavorites.jsx";
 import '../../styles/bidPage.css';
 
 const BidPage = () => {
@@ -22,9 +23,8 @@ const BidPage = () => {
 
     const formattedTime = useMemo(() => { 
        if (!bid) return { date: '', time: '' };
-       return formatTime(bid.startTime);
+       return formatTime(bid.bid.startTime);
     },[bid]);
-
 
     return (
         <>
@@ -35,23 +35,24 @@ const BidPage = () => {
                         <img src={placeholder} alt="" />
                     </div>
                     <div className="bid-text">
-                        <h1>{bid.bidItem}</h1>
-                        <h2>Posted by {bid.bid_host.username}</h2>
-                        <h2>starting at {bid.startingBid}</h2>
+                        <h1>{bid.bid.bidItem}</h1>
+                        <h2>Posted by {bid.bid.bid_host.username}</h2>
+                        <h2>starting at {bid.bid.startingBid}</h2>
                         <p>Day bid will start: {formatDate(formattedTime.date)}</p>
                         <p>time: {formattedTime.time}</p>
-                        <p>{formatDuration(bid.bid_duration)}</p>
-                        <p className="category">{bid.category}</p>
+                        <p>{formatDuration(bid.bid.bid_duration)}</p>
+                        <p className="category">{bid.bid.category}</p>
                     </div>
                 </div>
                 <div className="bid-buttons">
-                {!user || user.id !== bid.userId && (
-                    <>
-                    <BidPageFavorites bid={bid} bidId={bidId} />
-                    <BidPageJoin bid={bid}/>
-                    </>
+                {(!user || user?.id !== bid.bid.userId) && (
+                <>
+                    {!bid.favorited && <BidPageFavorites bidId={bidId} />}
+                    {bid.favorited && <DeleteFavorites bidId={bidId} />}
+                    <BidPageJoin bid={bid.bid} />
+                </>
                 )}
-                {user && user.id === bid.userId && (
+                {user && user.id === bid.bid.userId && (
                     <>
                      <DeleteBid bidId={bidId} />
                     </>

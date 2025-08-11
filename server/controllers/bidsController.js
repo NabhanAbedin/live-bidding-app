@@ -1,8 +1,9 @@
 const {asyncErrorHandler} = require('../middleware/errorMiddleware');
 const AppError = require('../utils/AppError');
 const {getAllBidsModel,searchBidsModel,getBidByIdModel,postBidModel,deleteBidModel, updateBidModel} = require('../models/bidsModel');
-const {deleteFavoritesForBidsModel} = require('../models/favoritesModel');
+const {deleteFavoritesForBidsModel, checkFavoriteByBidModel} = require('../models/favoritesModel');
 const {Temporal} = require('@js-temporal/polyfill');
+const { favorites } = require('../db');
 
 const getBids = asyncErrorHandler(async(req,res,next) => {
     if (req.query.search) {
@@ -21,7 +22,13 @@ const getBids = asyncErrorHandler(async(req,res,next) => {
 const getBidById = asyncErrorHandler(async(req,res)=> {
     const bidId = req.params.bidId;
     const bid = await getBidByIdModel(Number(bidId));
-    return res.status(200).json(bid);
+    let favorited = false;
+    
+    if (req.userId) {
+        favorited  = await checkFavoriteByBidModel(Number(bidId),Number(req.userId));
+    }
+
+    return res.status(200).json({bid,favorited});
 })
 
 const postBid = asyncErrorHandler(async(req,res)=> {

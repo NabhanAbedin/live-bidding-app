@@ -8,14 +8,14 @@ const Statistics = ({user,authLoading}) => {
         queryKey: ['financialStats'],
         queryFn: getStatistics,
         enabled: !authLoading && Boolean(user)
-    })
+    }) 
 
     return (
        <>
         {stats && (
              <>
              <SpentVsWonChart totalSpent={stats.totalSpent} totalWon={stats.totalEarned} />
-           </>
+             </>
         )}
        </>
     )

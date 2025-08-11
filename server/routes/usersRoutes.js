@@ -3,7 +3,7 @@ const router = express.Router();
 const collectionsRoutes = require('./collectionsRoutes');
 const bidsRoutes = require('./bidsRoutes');
 const favoritesRoutes = require('./favoritesRoutes');
-const authMiddleware = require('../middleware/authMiddleware');
+const {authMiddleware} = require('../middleware/authMiddleware');
 const ctrl = require('../controllers/usersController');
 
 

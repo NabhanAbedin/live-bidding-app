@@ -25,7 +25,9 @@ export const getBidsForHomePage = async () => {
 }
 
 export const fetchBidById = async (bidId) => {
-    const res = await fetch(`${API_BASE}/api/bids/${bidId}`);
+    const res = await fetch(`${API_BASE}/api/bids/${bidId}`, {
+        credentials: 'include'
+    });
     const json = await res.json();
 
     if (!res.ok) {

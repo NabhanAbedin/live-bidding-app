@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import bidDateValidation from "../../utils/bidDateValidation.js";
-import { useQuery } from "@tanstack/react-query";
 
 const BidPageJoin = ({bid}) => {
     const validToJoin = useMemo(() => {

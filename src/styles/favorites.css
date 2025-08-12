@@ -1,0 +1,87 @@
+
+
+/* ===== Empty state for Favorites ===== */
+.no-favorites {
+  width: 100%;
+  padding: 64px 16px; /* bigger */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-favorites-card {
+  max-width: 720px;
+  width: 100%;
+  background: transparent; /* flat – no box */
+  border: none;            /* flat – no border */
+  border-radius: 0;        /* flat – no radius */
+  padding: 40px 16px;      /* larger spacing */
+  text-align: center;
+  box-shadow: none;        /* flat – no shadow */
+}
+
+.no-favorites-icon {
+  width: 96px;   /* bigger */
+  height: 96px;  /* bigger */
+  border-radius: 50%;
+  margin: 0 auto 16px auto; /* slightly larger gap */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff9a56, #ff6b35);
+  color: #ffffff;
+}
+
+.no-favorites-title {
+  margin: 10px 0 6px 0;
+  font-size: 28px;   /* bigger */
+  font-weight: 600;
+}
+
+.no-favorites-subtitle {
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 17px;   /* bigger */
+  max-width: 560px;  /* readable line length */
+}
+
+.no-favorites-actions {
+  margin-top: 20px; /* a bit larger */
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Button base (scoped for safety) */
+.no-favorites .btn { 
+  appearance: none;
+  border: 1px solid transparent;
+  padding: 12px 20px;   /* bigger */
+  border-radius: 12px;  /* slightly larger radius */
+  font-weight: 500;
+  font-size: 16px;      /* bigger */
+  cursor: pointer;
+}
+
+.no-favorites .btn-primary {
+  background: linear-gradient(135deg, #ff9a56, #ff6b35);
+  color: #ffffff;
+  border-color: #ff8a4a;
+}
+
+.no-favorites .btn-primary:hover {
+  box-shadow: none;            /* keep flat look */
+  filter: brightness(0.98);
+}
+
+.no-favorites .btn-secondary {
+  background: #ffffff;
+  color: #374151; /* gray-700 */
+  border: 1px solid #e5e7eb;
+  width: 90px;
+}
+
+.no-favorites .btn-secondary:hover {
+  background: #f9fafb;
+}

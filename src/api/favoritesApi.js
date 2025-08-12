@@ -6,7 +6,6 @@ export const addToFavorites = async (bidId) => {
         credentials: "include"
     })
     const json = await res.json();
-    console.log(res, json);
     if (!res.ok) {
         throw new Error(json.message);
     }

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { fetchCollections } from "../../api/collectionsApi";
 import '../../styles/collections.css';
 import { useEffect } from "react";
+import NoCollections from "./NoCollections";
 import CollectionBidCard from "../bidCards/CollectionBidCard";
 import BarChart from "./CategoryChart";
 
@@ -27,7 +28,7 @@ const Collections = () => {
 
     return (
         <div className="collections-container">
-           {data && (
+           {data ? (
             <>
               <div className="collections-grid">
                 {data.collection.map(c => (
@@ -44,7 +45,10 @@ const Collections = () => {
                 </div>
             </div>
             </>
+           ) : (
+            <NoCollections />
            )}
+
         </div>
     )
 }

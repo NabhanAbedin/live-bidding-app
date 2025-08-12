@@ -4,7 +4,7 @@ import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 
 
-const BidPageFavorites = ({bidId}) => {
+const AddToFavorites = ({bidId}) => {
     const qc = useQueryClient();
     const {user} = useAuth();
     const navigate = useNavigate();
@@ -34,4 +34,4 @@ const BidPageFavorites = ({bidId}) => {
     )
 }
 
-export default BidPageFavorites;
+export default AddToFavorites;

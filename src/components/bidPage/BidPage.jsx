@@ -8,7 +8,7 @@ import formatTime from "../../utils/formatTime.js";
 import { useMemo } from "react";
 import { useAuth } from "../../context/authContext.jsx";
 import BidPageJoin from "./BidPageJoin.jsx";
-import BidPageFavorites from "./BidPageFavorites.jsx";
+import AddToFavorites from "./AddToFavorites.jsx";
 import DeleteBid from "./DeleteBid.jsx";
 import DeleteFavorites from "./DeleteFavorites.jsx";
 import '../../styles/bidPage.css';
@@ -47,7 +47,7 @@ const BidPage = () => {
                 <div className="bid-buttons">
                 {(!user || user?.id !== bid.bid.userId) && (
                 <>
-                    {!bid.favorited && <BidPageFavorites bidId={bidId} />}
+                    {!bid.favorited && <AddToFavorites bidId={bidId} />}
                     {bid.favorited && <DeleteFavorites bidId={bidId} />}
                     <BidPageJoin bid={bid.bid} />
                 </>

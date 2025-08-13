@@ -11,7 +11,7 @@ const Favorites = () => {
     const {user, authLoading} = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {     
+    useEffect(() => {  
         if (authLoading) return;
         if (!user) navigate('/login');
         
@@ -23,23 +23,20 @@ const Favorites = () => {
         enabled: !authLoading && Boolean(user)
     })
 
-    console.log(favoriteBids)
-
     return (
         <>
-        {favoriteBids.length > 0 ? (
-            <>
-            <h1>Your future bids are waiting</h1>
-            <div className="postedbids-grid">
-                {favoriteBids.map(bid => (
-                <BidCard key={bid.id}  id={bid.bidId} bidItem={bid.bidItem} startingBid={bid.startingBid} startTime={bid.posted} bid_duration={bid.bid_duration}  />
-                ))}
-            </div>
-            </>
-        ): (
-            <NoFavorites/>
-        )}
-
+         {favoriteBids && favoriteBids.length > 0 ? (
+                <>
+                <h1>Your future bids are waiting</h1>
+                <div className="postedbids-grid">
+                    {favoriteBids.map(bid => (
+                    <BidCard key={bid.id}  id={bid.bidId} bidItem={bid.bidItem} startingBid={bid.startingBid} startTime={bid.posted} bid_duration={bid.bid_duration}  />
+                    ))}
+                </div>
+                </>
+            ): (
+                <NoFavorites/>
+            )}
         </>
     )
 }

@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const socketIO = require('socket.io');
 const bidsEvents = require('./socket_handlers/bidsEvents');
 const chatsEvents = require('./socket_handlers/chatsEvents');
+const cookie = require('cookie');
 const AppError = require('./utils/AppError');
 
 const attachSocket = (server) => {
@@ -10,10 +11,12 @@ const attachSocket = (server) => {
   });
 
   io.use((socket, next) => {
-    const token = socket.handshake.auth.token;
+    const raw = socket.handshake.headers?.cookie || '';
+    const parsed = cookie.parse(raw);
+    const token = parsed.token;             
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      socket.userId = decoded.id;
+      socket.userId = decoded.userId;
       next();
     } catch {
       next(new Error('Authentication error'));

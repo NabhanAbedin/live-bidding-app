@@ -10,6 +10,7 @@ import { CreateBidsProvider } from "./context/createBidsContext";
 import Collections from "./components/collections/Collections";
 import Financials from "./components/financials/Financials";
 import Favorites from "./components/favorites/Favorites";
+import LiveBids from "./components/liveBids/LiveBids";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path={'/favorites'} element={<Favorites />} />
             <Route path={'/collections/:userId'} element={<Collections />} />
             <Route path={'/financials'} element={<Financials />} />
+            <Route path={'/liveBid/:bidId'} element={<LiveBids />} />
         </Routes>
         </>
     )

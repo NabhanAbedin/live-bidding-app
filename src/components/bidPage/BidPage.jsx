@@ -49,7 +49,7 @@ const BidPage = () => {
                 <>
                     {!bid.favorited && <AddToFavorites bidId={bidId} />}
                     {bid.favorited && <DeleteFavorites bidId={bidId} />}
-                    <BidPageJoin bid={bid.bid} />
+                    <BidPageJoin bid={bid.bid} bidId={bidId}/>
                 </>
                 )}
                 {user && user.id === bid.bid.userId && (

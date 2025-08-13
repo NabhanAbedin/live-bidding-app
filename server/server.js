@@ -39,6 +39,6 @@ attachSocket(server);
 
 app.use(globalErrorHandler);
 
-app.listen(5002, () => {
+server.listen(5002, () => {
     console.log('server + socket started on port 5002');
 })

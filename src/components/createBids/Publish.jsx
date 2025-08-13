@@ -24,8 +24,9 @@ const Publish = () => {
         mutate();
     }
     if (isLoading) return <p>Loading...</p>
+    
     if (error) {
-        console.log(error);
+        navigate('/login');
     }
 
     return (

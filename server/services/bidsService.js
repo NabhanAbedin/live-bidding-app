@@ -5,21 +5,32 @@ const placeBid = async (bidId, amount, userId) => {
   const nowInstant = Temporal.Now.instant();
   const nowDate = new Date(nowInstant.epochMilliseconds);
 
-    const result = await prisma.bids.updateMany({
+   return prisma.$transaction(async (tx) => {
+    const currencyAmount = await tx.users.findMany({
         where: {
-          id: bidId,
-          startTime: {lte: nowDate},
-          endTime: {gt: nowDate},
-          OR: [
-            { highestBid: null, startingBid: { lt: amount } },
-            { highestBid: { lt: amount } }
-          ]
-        },
-        data: { highestBid: amount, winnerId: userId }
-      });
+          id: userId,
+          currency: {gte: amount}
+        }
+    })
+
+    if (currencyAmount.length === 0) return false;
+
+    const result = await tx.bids.updateMany({
+      where: {
+        id: bidId,
+        startTime: {lte: nowDate},
+        endTime: {gt: nowDate},
+        OR: [
+          { highestBid: null, startingBid: { lt: amount } },
+          { highestBid: { lt: amount } }
+        ]
+      },
+      data: { highestBid: amount, winnerId: userId }
+    });
 
     if (result.count === 0) return false;
-    return await prisma.bids.findUnique({
+
+    return await tx.bids.findUnique({
       where: {
         id: bidId
       },
@@ -28,6 +39,8 @@ const placeBid = async (bidId, amount, userId) => {
         winnerId: true
       }
     })
+   })
+
 }
 
 

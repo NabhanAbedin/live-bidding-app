@@ -45,6 +45,7 @@ const getBidByIdModel = async (bidId) => {
             posted: true,
             bid_duration: true,
             startTime: true,
+            endTime: true,
             category: true,
             userId: true,
             bid_host: {
@@ -60,13 +61,14 @@ const getBidByIdModel = async (bidId) => {
     return row;
 }
 
-const postBidModel = async (userId,bidItem,startingBid,startingTime,category,duration) => {
+const postBidModel = async (userId,bidItem,startingBid,startingTime,endTime,category,duration) => {
     const bidId = await prisma.bids.create({
         data: {
             userId: userId,
             bidItem: bidItem,
             startingBid: startingBid,
             startTime: startingTime,
+            endTime: endTime,
             category: category,
             bid_duration: duration
         },

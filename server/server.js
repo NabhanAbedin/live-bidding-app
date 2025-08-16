@@ -13,6 +13,8 @@ const authRoutes = require('./routes/authRoutes');
 const bidRoutes = require('./routes/bidsRoutes');
 const usersRoutes = require('./routes/usersRoutes');
 
+const { startCollectionUpdater } = require('./scehdulers/auctionScheduler');
+
 const server = http.createServer(app);
 
 app.use(cookieParser());
@@ -36,6 +38,8 @@ app.all('/*splat', (req,res,next) => {
 })
 
 attachSocket(server);
+
+startCollectionUpdater();
 
 app.use(globalErrorHandler);
 

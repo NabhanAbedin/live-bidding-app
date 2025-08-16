@@ -3,7 +3,8 @@ import placeholder from '../../assets/placeHolder.png';
 import '../../styles/bidcard.css';
 
 
-const CollectionBidCard = ({bidId, bidItem, bidSold, startTime, category}) => {
+const CollectionBidCard = ({bidId, bidItem, highestBid, startTime, category}) => {
+    console.log(bidId, bidItem, highestBid, startTime, category);
     return (
         <>
         <div className="bidcard-container collections-card" key={bidId}>
@@ -12,7 +13,7 @@ const CollectionBidCard = ({bidId, bidItem, bidSold, startTime, category}) => {
             </div>
             <div className="text-container">
                 <h3>{bidItem}</h3>
-                <h4>starting at {bidSold}</h4>
+                <h4>bid sold at {highestBid}</h4>
                 <p>{formatDate(startTime)}</p>
                 <p className="category">{category}</p>
             </div>  

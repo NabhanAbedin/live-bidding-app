@@ -10,7 +10,7 @@ const getCollectionModel = async (userId) => {
             bids: {
                 select: {
                     bidItem: true,
-                    bidSold: true,
+                    highestBid: true,
                     startTime: true,
                     category: true
                 }
@@ -46,11 +46,11 @@ const collectionsTotalSpentModel = async (userId) => {
             }
         },
         _sum: {
-            bidSold: true
+            highestBid: true
         }
     })
 
-    return row._sum.bidSold;
+    return row._sum.highestBid;
 }
 
 const collectionsCategorizedModel = async (userId) => {
@@ -64,12 +64,12 @@ const collectionsCategorizedModel = async (userId) => {
             }
         },
         _sum: {
-            bidSold: true
+            highestBid: true
         }
     })
 
-    return rows.reduce((acc, { category, _sum: { bidSold } }) => {
-        acc[category] = bidSold ?? 0;
+    return rows.reduce((acc, { category, _sum: { highestBid } }) => {
+        acc[category] = highestBid ?? 0;
         return acc;
       }, {});
 

@@ -4,6 +4,8 @@ const bidsEvents = require('./socket_handlers/bidsEvents');
 const chatsEvents = require('./socket_handlers/chatsEvents');
 const cookie = require('cookie');
 const AppError = require('./utils/AppError');
+const {Temporal} = require('@js-temporal/polyfill');
+
 
 const attachSocket = (server) => {
   const io = socketIO(server, {
@@ -26,6 +28,10 @@ const attachSocket = (server) => {
   io.on('connection', socket => {
     socket.on('joinBidRoom', bidId => {
       socket.join(`bidRoom:${bidId}`);
+
+      const serverTime = Temporal.Now.instant().toString();
+      socket.emit('serverTime', serverTime);
+
     });
     bidsEvents(io, socket);
     chatsEvents(io, socket);

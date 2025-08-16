@@ -6,7 +6,7 @@ module.exports = (io,socket) => {
         try {
             const updatedBid = await placeBid(Number(bidId), Number(amount), socket.userId);
 
-            if (!success) {
+            if (!updatedBid) {
                 return socket.emit('bidError', {
                     bidId,
                     message: 'Your bid is lower than the current amount'

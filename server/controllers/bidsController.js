@@ -36,10 +36,14 @@ const postBid = asyncErrorHandler(async(req,res)=> {
     const {bidItem,startingBid,startingDate, startingTime,category,duration, clientTimeZone} = req.body;
 
     const startingTimeString = `${startingDate}T${startingTime}:00.000`;
-    const startingTimeNY = Temporal.PlainDateTime.from(startingTimeString);
-    const startingTimeUTC = startingTimeNY.toZonedDateTime(clientTimeZone).toInstant();
 
-    const bidId = await postBidModel(userId,bidItem,Number(startingBid),startingTimeUTC,category,Number(duration));
+    const startingTimeNY = Temporal.PlainDateTime.from(startingTimeString);
+    const endTimeNY = startingTimeNY.add({minutes: duration});
+
+    const startingTimeUTC = startingTimeNY.toZonedDateTime(clientTimeZone).toInstant();
+    const endTimeUTC = endTimeNY.toZonedDateTime(clientTimeZone).toInstant();
+
+    const bidId = await postBidModel(userId,bidItem,Number(startingBid),startingTimeUTC, endTimeUTC,category,Number(duration));
     //use the bid id for the client to redirect to the bid that they just posted
 
     return res.status(201).json({bidId: bidId});

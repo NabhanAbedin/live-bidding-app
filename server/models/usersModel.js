@@ -62,11 +62,11 @@ const totalEarnedModel = async (userId) => {
             }
         },
         _sum: {
-            bidSold: true
+            highestBid: true
         }
     })
 
-   return  row._sum.bidSold ? row._sum.bidSold : 0;
+   return  row._sum.highestBid ? row._sum.highestBid : 0;
 }
 
 const addTransaction = async (userId,amount) => {

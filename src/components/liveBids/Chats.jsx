@@ -1,17 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { getChats } from "../../api/chatsApi";
+import { useEffect, useRef, useState } from "react";
 
 
-const Chats = ({socket,bidId,user}) => {
+const Chats = ({socket,bidId,user, previousChats}) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
-
-    const {data: previousChats, isLoading, Error} = useQuery({
-        queryKey: ['previousChats', bidId],
-        queryFn: () => getChats(bidId),
-        staleTime: 0
-    })
+    const messagesContainer = useRef(null);
 
     useEffect(() => {
         if (previousChats && previousChats.length > 0) {
@@ -32,6 +25,10 @@ const Chats = ({socket,bidId,user}) => {
           };
     },[socket]);
 
+    useEffect(() => {
+        messagesContainer.current?.scrollIntoView({ behavior: 'smooth' });
+    },[messages]);
+
     const sendMessage = (e) => {
         e.preventDefault();
         if (input.trim() === '') return;
@@ -51,6 +48,7 @@ const Chats = ({socket,bidId,user}) => {
                         </div>
                     ))
                 )}
+                <div ref={messagesContainer}></div>
             </div>
             <form className="userinput" onSubmit={e => sendMessage(e)}>
                 <input type="text" placeholder="send message" 

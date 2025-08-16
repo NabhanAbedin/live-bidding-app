@@ -29,6 +29,7 @@ model bids {
   category     Category
   posted       DateTime      @default(now())
   startTime    DateTime
+  endTime      DateTime
   userId       Int
   bidSold      Int?
   winnerId     Int?

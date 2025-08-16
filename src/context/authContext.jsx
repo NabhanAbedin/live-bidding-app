@@ -10,7 +10,8 @@ export const AuthProvider =({children}) => {
     const {data: userData, isLoading: authLoading, isError, error} = useQuery({
         queryKey: ['user'],
         queryFn: getUser,
-        retry: 0
+        retry: 0,
+        refetchOnReconnect: true
     })
 
     console.log(user);

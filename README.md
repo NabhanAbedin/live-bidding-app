@@ -38,11 +38,15 @@ A real-time auction platform where users can participate in time-boxed auctions 
 - TanStack Query handles REST API calls for data fetching
 - Socket.IO client manages real-time auction room interactions
 
-### Server (Monolithic Design)
-- REST API Layer: Handles authentication, auction creation/viewing, and financial transactions
-- WebSocket Layer: Manages real-time bidding and chat through Socket.IO rooms
-- Scheduler: node-cron automatically finalizes expired auctions
-- Database Layer: Prisma ORM with PostgreSQL for data persistence
+### Server (Monolithic MVC Architecture)
+Single deployable application using the Model–View–Controller pattern for clear separation of concerns.
+
+- **REST API Layer (MVC):** Authentication, auction CRUD, and financial transactions  
+  - **Controllers:** Process requests and orchestrate business logic  
+  - **Models:** Database access layer using Prisma ORM for PostgreSQL operations
+- **WebSocket Layer:** Real-time bidding and chat through Socket.IO rooms
+- **Background Services:** Automated auction finalization via `node-cron` scheduler
+- **Middleware:** JWT authentication and centralized error handling
   
 ### Error Handling
 The application implements centralized error handling middleware for consistent error responses across all endpoints:

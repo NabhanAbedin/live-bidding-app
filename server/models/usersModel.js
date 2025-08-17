@@ -1,5 +1,5 @@
 const prisma = require('../db');
-
+const {Temporal} = require('@js-temporal/polyfill');
 
 const updateCurrency = async (currency, userId) => {
     const row = await prisma.users.update({
@@ -54,18 +54,20 @@ const recentTransactions = async (userId) => {
 }
 
 const totalEarnedModel = async (userId) => {
+  const nowInstant = Temporal.Now.instant();
+  const nowDate = new Date(nowInstant.epochMilliseconds);
+
     const row = await prisma.bids.aggregate({
         where: {
             userId: userId,
-            bidSold: {
-                not: null
-            }
+            endTime: {lt: nowDate}
         },
         _sum: {
             highestBid: true
         }
     })
 
+    console.log(row);
    return  row._sum.highestBid ? row._sum.highestBid : 0;
 }
 

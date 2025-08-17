@@ -9,7 +9,9 @@ const Statistics = ({user,authLoading}) => {
         queryFn: getStatistics,
         enabled: !authLoading && Boolean(user)
     }) 
-
+    if (stats) {
+        console.log(stats);
+    }
     return (
        <>
         {stats && (

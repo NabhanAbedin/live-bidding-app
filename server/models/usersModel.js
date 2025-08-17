@@ -38,7 +38,7 @@ const recentTransactions = async (userId) => {
             bids: {
                 select: {
                     bidItem: true,
-                    bidSold: true,
+                    highestBid: true,
                     startTime: true
                 }
             }
@@ -48,7 +48,7 @@ const recentTransactions = async (userId) => {
 
     return row.map(entry => ({
         bidItem: entry.bids.bidItem,
-        bidSold: entry.bids.bidSold,
+        bidSold: entry.bids.highestBid,
         startTime: entry.bids.startTime
     }));
 }
@@ -66,8 +66,7 @@ const totalEarnedModel = async (userId) => {
             highestBid: true
         }
     })
-
-    console.log(row);
+    
    return  row._sum.highestBid ? row._sum.highestBid : 0;
 }
 

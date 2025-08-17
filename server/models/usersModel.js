@@ -66,7 +66,7 @@ const totalEarnedModel = async (userId) => {
             highestBid: true
         }
     })
-    
+
    return  row._sum.highestBid ? row._sum.highestBid : 0;
 }
 

@@ -1,6 +1,6 @@
 import { Link, useNavigate} from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logOut } from "../../api/authApi";
 
 
@@ -8,12 +8,14 @@ import { logOut } from "../../api/authApi";
 const Nav = () => {
     const navigate = useNavigate();
     const {user, clientLogOut, authLoading} = useAuth();
+    const qc = useQueryClient();
 
     const {mutate, isLoading, isError, error} =useMutation({
         mutationFn: logOut,
         onSuccess: () => {
           clientLogOut();
           navigate('/');
+          qc.clear();
         },
         onError: (err) => {
           console.error(err);

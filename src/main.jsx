@@ -21,7 +21,6 @@ createRoot(document.getElementById('root')).render(
         <AuthProvider>
             <BrowserRouter>
                 <App />
-                <ReactQueryDevtools initialIsOpen={false} />
             </BrowserRouter>
         </AuthProvider>
     </QueryClientProvider>

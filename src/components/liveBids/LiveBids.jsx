@@ -85,15 +85,10 @@ const LiveBids = () => {
         };
     }, [socket, bidInfo]);
 
-    
-
-    if (authLoading || chatsLoading || bidInfoLoading) {
-      return <BidLoading />;
-    }
 
     return (
         <div className="live-bid-container">
-            {(authLoading || chatsLoading) && (
+            {(authLoading || chatsLoading || bidInfoLoading) && (
                  <BidLoading />
                 )}
              {(previousChats && user && bidInfo) && (

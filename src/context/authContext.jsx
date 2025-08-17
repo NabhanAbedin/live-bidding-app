@@ -14,8 +14,6 @@ export const AuthProvider =({children}) => {
         refetchOnReconnect: true
     })
 
-    console.log(user);
-
     useEffect(() => {
         if (userData) {
           setUser({ id: userData.id, username: userData.username, currency: userData.currency });

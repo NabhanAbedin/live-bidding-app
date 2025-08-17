@@ -381,3 +381,26 @@
     }
 }
 
+.final-review {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.final-review input {
+    margin-right: 5px;
+}
+
+.final-review button {
+    margin-top: 20px;
+    width: 250px;
+    height: 40px;
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    border: none;
+    border-radius: 10px;
+}
+
+.final-review button:hover {
+    cursor: pointer;
+}

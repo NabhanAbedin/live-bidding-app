@@ -35,11 +35,13 @@ const Publish = () => {
             <BidPreviewCard {...formData} preview={true}/>
         </div>
         <form className="final-review" onSubmit={e => handleSubmit(e)}>
-            <input type="checkbox" required/>
-            I have read and agree to the
-            <Link to="/terms" target="_blank">Terms of Service</Link>
-             
-            <Link to="/privacy" target="_blank">Privacy Policy</Link>
+            <div>
+                <input type="checkbox" required/>
+                I have read and agree to the&nbsp;
+                <Link to="/terms" target="_blank">Terms of Service&nbsp;</Link>
+                and&nbsp;
+                <Link to="/privacy" target="_blank">Privacy Policy</Link>
+            </div>
             <button type="submit">Publish</button>
         </form>
         </>
